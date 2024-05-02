@@ -18,21 +18,21 @@ public class ChessBoard extends JPanel{
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAME,FRAME);
       animationObjects = new ArrayList<BasicFunctions>();
-      animationObjects.add(new King('B',b));
-      animationObjects.add(new King('W',b));
-      animationObjects.add(new Queen('B',b));
-      animationObjects.add(new Queen('W',b));
+      animationObjects.add(new King('B',b,animationObjects));
+      animationObjects.add(new King('W',b,animationObjects));
+      animationObjects.add(new Queen('B',b,animationObjects));
+      animationObjects.add(new Queen('W',b,animationObjects));
       for(int i=0;i<8;i++){
          if(i<2){
-            animationObjects.add(new Rook('W', i, b));
-            animationObjects.add(new Rook('B', i, b));
-            animationObjects.add(new Bishop('W', i, b));
-            animationObjects.add(new Bishop('B', i, b));
-            animationObjects.add(new Knight('W', i, b));
-            animationObjects.add(new Knight('B', i, b));
+            animationObjects.add(new Rook('W', i, b,animationObjects));
+            animationObjects.add(new Rook('B', i, b,animationObjects));
+            animationObjects.add(new Bishop('W', i, b,animationObjects));
+            animationObjects.add(new Bishop('B', i, b,animationObjects));
+            animationObjects.add(new Knight('W', i, b,animationObjects));
+            animationObjects.add(new Knight('B', i, b,animationObjects));
          }
-         animationObjects.add(new Pawn('W', i, b));
-         animationObjects.add(new Pawn('B', i, b));
+         animationObjects.add(new Pawn('W', i, b,animationObjects));
+         animationObjects.add(new Pawn('B', i, b,animationObjects));
       }
       t = new Timer(5, new AnimationListener());
       t.start();

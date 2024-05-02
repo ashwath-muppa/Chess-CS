@@ -14,6 +14,7 @@ public abstract class Piece implements BasicFunctions{
     protected char color;
     protected boolean moving=false;
     protected int[][] board;
+    protected ArrayList<BasicFunctions> otherPieces;
 
     public int getX(){
         return x;
@@ -38,6 +39,9 @@ public abstract class Piece implements BasicFunctions{
     }
     public void setY(int yValue){
         y = yValue;
+    }
+    public char getColor(){
+        return color;
     }
     public void setMove(int x, int y){
         setDestX(x);
@@ -75,9 +79,26 @@ public abstract class Piece implements BasicFunctions{
     public void activate(){
         active = !active;
     }
-
-
+    public void step(){
+        if(moving){
+            if(destY>y){
+                  setY(getY()+getdY());
+            }else{
+                  setY(getY()-getdY());
+            }
+            if(destX==x&&destY==y){
+                  moving=false;
+            }
+            if(destX>x){
+                  setX(getX()+getdX());
+            }else if(destX<x){
+                  setX(getX()-getdX());
+            }
+            if(destX==x&&destY==y){
+                  moving=false;
+            }
+         }
+    }
     public abstract ArrayList<int[]> legalMoves();
-    public abstract void step();
 
 }
