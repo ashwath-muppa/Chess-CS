@@ -82,11 +82,6 @@ public class ChessBoard extends JPanel{
                   fin[0]=1;
                   fin[1]=animationObject.getX();
                   fin[2]=animationObject.getY();
-                  if(turn=='W'){
-                     turn='B';
-                  }else{
-                     turn='W';
-                  }
                   return fin;
                }
          }
@@ -105,10 +100,12 @@ public class ChessBoard extends JPanel{
                int mX = x-move[0];
                int mY = y-move[1];
                if(mX>0&&mX<64&&mY>0&&mY<64){
-
                      animationObject.setMove((int)(Math.floor(x/64)*64), (int)(Math.floor(y/64)*64));
-
-
+                     if(turn=='W'){
+                        turn='B';
+                     }else{
+                        turn='W';
+                     }
                      return true;
                }
             }
