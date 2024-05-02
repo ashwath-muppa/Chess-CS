@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public abstract class Piece implements Animatable{
+public abstract class Piece implements BasicFunctions{
     protected int x;
     protected int y;
     protected int destY;

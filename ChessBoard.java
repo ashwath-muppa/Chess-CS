@@ -12,7 +12,7 @@ public class ChessBoard extends JPanel
    private BufferedImage myImage;
    private Graphics myBuffer;
    private Timer t;
-   private ArrayList<Animatable> animationObjects;
+   private ArrayList<BasicFunctions> animationObjects;
    public ChessBoard(int[][] b)
    { 
       myImage =  new BufferedImage(FRAME, FRAME, BufferedImage.TYPE_INT_RGB);
@@ -21,7 +21,7 @@ public class ChessBoard extends JPanel
       myBuffer.fillRect(0,0,FRAME,FRAME);
 
 
-      animationObjects = new ArrayList<Animatable>();
+      animationObjects = new ArrayList<BasicFunctions>();
       animationObjects.add(new King('B'));
       animationObjects.add(new King('W'));
       animationObjects.add(new Queen('B',b));
@@ -69,7 +69,7 @@ public class ChessBoard extends JPanel
    {
       drawBoard();
 
-      for(Animatable animationObject : animationObjects)
+      for(BasicFunctions animationObject : animationObjects)
       {
          animationObject.step();
          animationObject.drawMe(myBuffer);
@@ -79,7 +79,7 @@ public class ChessBoard extends JPanel
    //Updates the board, based on which piece is selected
    public int[] update(int x, int y){
       int [] fin = {0,0,0};
-      for(Animatable animationObject : animationObjects)
+      for(BasicFunctions animationObject : animationObjects)
       {  
          int pX = x-animationObject.getX();
          int pY = y-animationObject.getY();
@@ -98,7 +98,7 @@ public class ChessBoard extends JPanel
    //Checks if user inputted legal move for that piece, and makes move if legal
    //returns a boolean so that the panel can set its field accordingly
    public boolean legalMove(int x, int y, int curx, int cury){
-      for(Animatable animationObject : animationObjects)
+      for(BasicFunctions animationObject : animationObjects)
       {  
          int pX = animationObject.getX();
          int pY = animationObject.getY();

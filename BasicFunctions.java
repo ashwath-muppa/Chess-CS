@@ -1,7 +1,7 @@
 // import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-public interface Animatable
+public interface BasicFunctions
 {
    public void step();
    public void drawMe(Graphics g);
