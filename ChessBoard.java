@@ -22,8 +22,8 @@ public class ChessBoard extends JPanel
 
 
       animationObjects = new ArrayList<BasicFunctions>();
-      animationObjects.add(new King('B'));
-      animationObjects.add(new King('W'));
+      animationObjects.add(new King('B',b));
+      animationObjects.add(new King('W',b));
       animationObjects.add(new Queen('B',b));
       animationObjects.add(new Queen('W',b));
       for(int i=0;i<8;i++){
