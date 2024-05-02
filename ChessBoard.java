@@ -5,7 +5,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.lang.Math;
 
+
 public class ChessBoard extends JPanel{  
+   private char turn = 'W';
    public static final int FRAME = 512;
    private static final Color BACKGROUND = new Color(204, 204, 204);
    private BufferedImage myImage;
@@ -69,17 +71,24 @@ public class ChessBoard extends JPanel{
    //Updates the board, based on which piece is selected
    public int[] update(int x, int y){
       int [] fin = {0,0,0};
+      System.out.println(turn);
       for(BasicFunctions animationObject : animationObjects){  
          int pX = x-animationObject.getX();
          int pY = y-animationObject.getY();
-         if(pX>0 && pX<64){
-            if(pY>0 && pY<64){
-               animationObject.activate();
-               fin[0]=1;
-               fin[1]=animationObject.getX();
-               fin[2]=animationObject.getY();
-               return fin;
-            }
+         
+            if(pX>0 && pX<64&&pY>0 && pY<64){
+               if(animationObject.getColor()==turn){
+                  animationObject.activate();
+                  fin[0]=1;
+                  fin[1]=animationObject.getX();
+                  fin[2]=animationObject.getY();
+                  if(turn=='W'){
+                     turn='B';
+                  }else{
+                     turn='W';
+                  }
+                  return fin;
+               }
          }
       }
       return fin;
@@ -96,7 +105,10 @@ public class ChessBoard extends JPanel{
                int mX = x-move[0];
                int mY = y-move[1];
                if(mX>0&&mX<64&&mY>0&&mY<64){
+
                      animationObject.setMove((int)(Math.floor(x/64)*64), (int)(Math.floor(y/64)*64));
+
+
                      return true;
                }
             }
@@ -104,6 +116,10 @@ public class ChessBoard extends JPanel{
       }
       return false;
     }
+
+    
+    
+
    private class AnimationListener implements ActionListener{
       public void actionPerformed(ActionEvent e)
       {

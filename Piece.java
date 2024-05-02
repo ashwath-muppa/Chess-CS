@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import javax.sound.sampled.*;
+import java.io.*;
 
 public abstract class Piece implements BasicFunctions{
     protected int x;
@@ -44,6 +46,7 @@ public abstract class Piece implements BasicFunctions{
         return color;
     }
     public void setMove(int x, int y){
+        boolean captured = false;
         setDestX(x);
         setDestY(y);
         board[(int)(Math.floor(getY()/64))][(int)(Math.floor(getX()/64))]=0;
@@ -60,7 +63,30 @@ public abstract class Piece implements BasicFunctions{
                                                                 }
         active = false;
         moving = true;
+        for(BasicFunctions piece : otherPieces){
+            if(piece.getX()==x&&piece.getY()==y){
+                captured = true;
+                otherPieces.remove(piece);
+                break;
+            }
+        }
+        playAudio((captured)?("capture.wav"):("move.wav"));
+      }
+
+      public static void playAudio(String filename) {
+        try {
+            File audioFile = new File(filename);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+  
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+  
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+            ex.printStackTrace();
+        }
     }
+    
 
     public void drawMe(Graphics g)
     {  
