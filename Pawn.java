@@ -3,18 +3,15 @@ import java.lang.Math;
 
 public class Pawn extends Piece{
 
-    public Pawn(char s, int i, int[][] b)
-    {
+    public Pawn(char s, int i, int[][] b){
         x = i*64;
         y = (s=='W')?(384):64;
         file = (s=='W')?("pieces/pawn.png"):("pieces/pawn1.png");
         color=s;
         board=b;
     }
-
     public ArrayList<int[]> legalMoves(){
         ArrayList<int[]> legal = new ArrayList<int[]>();
-        
         if(color=='W'){
             if(getY()==384){
                 if(board[(int)(Math.floor(getY()/64))-1][(int)(Math.floor(getX()/64))]!=1){
@@ -53,8 +50,8 @@ public class Pawn extends Piece{
             }
         }
         return legal;
-   }
-   public void step(){
+    }
+    public void step(){
         if(moving){
             if(color == 'W'){
                 setY(getY()-getdY());
@@ -65,5 +62,5 @@ public class Pawn extends Piece{
         if(destY==y){
             moving=false;
         }
-   }
+    }
 }

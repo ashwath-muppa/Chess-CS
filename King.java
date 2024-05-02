@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 
-public class King extends Piece
-{
-   public King(char s, int[][] b)
-   {
+public class King extends Piece{
+   public King(char s, int[][] b){
       x = 256;
       y = (s=='W')?(448):0;
       file = (s=='W')?("pieces/king.png"):("pieces/king1.png");
@@ -33,7 +31,6 @@ public class King extends Piece
       }
       return legal;
    }
-
    public void step(){
       if(moving){
          if(destY>y){
@@ -54,5 +51,4 @@ public class King extends Piece
          }
       }
    }
-   
 }

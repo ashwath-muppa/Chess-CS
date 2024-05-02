@@ -15,12 +15,10 @@ public abstract class Piece implements BasicFunctions{
     protected boolean moving=false;
     protected int[][] board;
 
-    public int getX()
-    {
+    public int getX(){
         return x;
     }
-    public int getY()
-    {
+    public int getY(){
         return y;
     }
     public int getdY(){
@@ -29,22 +27,18 @@ public abstract class Piece implements BasicFunctions{
     public int getdX(){
         return dX;
     }
-    public void setDestX(int xValue)
-    {
+    public void setDestX(int xValue){
         destX = xValue;
     }
-    public void setDestY(int yValue)
-    {
+    public void setDestY(int yValue){
         destY = yValue;
     }
-   public void setX(int xValue)
-   {
-      x = xValue;
-   }
-   public void setY(int yValue)
-   {
-      y = yValue;
-   }
+    public void setX(int xValue){
+        x = xValue;
+    }
+    public void setY(int yValue){
+        y = yValue;
+    }
     public void setMove(int x, int y){
         setDestX(x);
         setDestY(y);
@@ -52,19 +46,20 @@ public abstract class Piece implements BasicFunctions{
         int tpY = (int)(Math.floor(x/64));
         int tpX = (int)(Math.floor(y/64));
         board[tpX][tpY]=1;
-        System.out.println("\n\n\n");
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++){
-                System.out.print(board[i][j]);
-            }
-            System.out.print("\n");
-        }
+                                                                //temporary debug code to print board state to terminal each move
+                                                                System.out.println("\n\n\n");
+                                                                for(int i=0;i<8;i++){
+                                                                    for(int j=0;j<8;j++){
+                                                                        System.out.print(board[i][j]); 
+                                                                    }
+                                                                    System.out.print("\n");
+                                                                }
         active = false;
         moving = true;
     }
 
     public void drawMe(Graphics g)
-   {  
+    {  
     if(active){
         g.setColor(new Color(0,255,0,128));
         g.fillRect(getX(), getY(),64,64);
@@ -74,7 +69,7 @@ public abstract class Piece implements BasicFunctions{
     }
       ImageIcon piece = new ImageIcon(file);
       g.drawImage(piece.getImage(),getX(), getY(), 64,64,null);
-   }
+    }
 
     
     public void activate(){

@@ -5,22 +5,18 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.lang.Math;
 
-public class ChessBoard extends JPanel
-{  
+public class ChessBoard extends JPanel{  
    public static final int FRAME = 512;
    private static final Color BACKGROUND = new Color(204, 204, 204);
    private BufferedImage myImage;
    private Graphics myBuffer;
    private Timer t;
    private ArrayList<BasicFunctions> animationObjects;
-   public ChessBoard(int[][] b)
-   { 
+   public ChessBoard(int[][] b){ 
       myImage =  new BufferedImage(FRAME, FRAME, BufferedImage.TYPE_INT_RGB);
       myBuffer = myImage.getGraphics();
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAME,FRAME);
-
-
       animationObjects = new ArrayList<BasicFunctions>();
       animationObjects.add(new King('B',b));
       animationObjects.add(new King('W',b));
@@ -38,16 +34,12 @@ public class ChessBoard extends JPanel
          animationObjects.add(new Pawn('W', i, b));
          animationObjects.add(new Pawn('B', i, b));
       }
-
       t = new Timer(5, new AnimationListener());
       t.start();
    }
-   
-   public void paintComponent(Graphics g)
-   {
+   public void paintComponent(Graphics g){
       g.drawImage(myImage, 0, 0, getWidth(), getHeight(), null);
    }
-
    //Draws the board underneath
    public void drawBoard(){
       myBuffer.setColor(new Color(118,150,86));
@@ -65,12 +57,10 @@ public class ChessBoard extends JPanel
       }
    }
    //Draws the board and each piece
-   public void animate()
-   {
+   public void animate(){
       drawBoard();
 
-      for(BasicFunctions animationObject : animationObjects)
-      {
+      for(BasicFunctions animationObject : animationObjects){
          animationObject.step();
          animationObject.drawMe(myBuffer);
       }        
@@ -79,8 +69,7 @@ public class ChessBoard extends JPanel
    //Updates the board, based on which piece is selected
    public int[] update(int x, int y){
       int [] fin = {0,0,0};
-      for(BasicFunctions animationObject : animationObjects)
-      {  
+      for(BasicFunctions animationObject : animationObjects){  
          int pX = x-animationObject.getX();
          int pY = y-animationObject.getY();
          if(pX>0 && pX<64){
@@ -98,8 +87,7 @@ public class ChessBoard extends JPanel
    //Checks if user inputted legal move for that piece, and makes move if legal
    //returns a boolean so that the panel can set its field accordingly
    public boolean legalMove(int x, int y, int curx, int cury){
-      for(BasicFunctions animationObject : animationObjects)
-      {  
+      for(BasicFunctions animationObject : animationObjects){  
          int pX = animationObject.getX();
          int pY = animationObject.getY();
          if(pX==curx && pY==cury){
@@ -116,13 +104,10 @@ public class ChessBoard extends JPanel
       }
       return false;
     }
-  
-   private class AnimationListener implements ActionListener
-   {
+   private class AnimationListener implements ActionListener{
       public void actionPerformed(ActionEvent e)
       {
          animate();
       }
    }
-   
 }

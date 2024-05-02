@@ -1,8 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class ChessPanel extends JPanel
-{
+public class ChessPanel extends JPanel{
    private ChessBoard display;
    private boolean pieceActive;
    private int[][] piecesBoard = {{1,1,1,1,1,1,1,1},
@@ -13,15 +12,10 @@ public class ChessPanel extends JPanel
                                   {0,0,0,0,0,0,0,0},
                                   {1,1,1,1,1,1,1,1},
                                   {1,1,1,1,1,1,1,1}};
-
    //holds piece currently selected
    private int curMX;
    private int curMY;
-
-   
-
-   public ChessPanel()
-   {
+   public ChessPanel(){
       //adds subpanel and main panel to JPanel
       setLayout(new BorderLayout());
       JPanel east = new JPanel();
@@ -37,10 +31,9 @@ public class ChessPanel extends JPanel
       
    }
    //Recieves the mouse input
-   private class Mouse extends MouseAdapter
-   {
-      public void mouseClicked(MouseEvent e)
-      {  //If no piece has been selected yet
+   private class Mouse extends MouseAdapter{
+      public void mouseClicked(MouseEvent e){  
+         //If no piece has been selected yet
          if(!pieceActive){
             //updates the piece to highlight legal moves in green
             int[] cur = display.update(e.getX(),e.getY());      
@@ -61,7 +54,7 @@ public class ChessPanel extends JPanel
             //move to there and no more pieces are active now
              else if(display.legalMove(e.getX(), e.getY(), curMX, curMY)){
                pieceActive = false;
-             }
+            }
          }
       }
    }

@@ -2,8 +2,7 @@ import java.util.ArrayList;
 
 public class Bishop extends Piece{
    
-    public Bishop(char s, int side, int[][] b)
-    {
+    public Bishop(char s, int side, int[][] b){
         x = (side==0)?(128):(320);
         y = (s=='W')?(448):0;
         file = (s=='W')?("pieces/bishop.png"):("pieces/bishop1.png");
@@ -45,8 +44,8 @@ public class Bishop extends Piece{
             legal.add(curLegal);
         }
       return legal;
-   }
-   public void step(){
+    }
+    public void step(){
     if(moving){
             if(destY>y){
                 setY(getY()+getdY());
@@ -64,6 +63,6 @@ public class Bishop extends Piece{
             if(destX==x){
                 moving=false;
             }
-       }
-   }
+        }
+    }
 }

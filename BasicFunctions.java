@@ -1,8 +1,6 @@
-// import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-public interface BasicFunctions
-{
+public interface BasicFunctions{
    public void step();
    public void drawMe(Graphics g);
    public int getX();

@@ -1,10 +1,7 @@
 import java.util.ArrayList;
 
 public class Knight extends Piece{
-   
-
-   public Knight(char s, int side, int[][] b)
-   {
+   public Knight(char s, int side, int[][] b){
       x = (side==0)?(64):(512-128);
       y = (s=='W')?(448):0;
       file = (s=='W')?("pieces/knight.png"):("pieces/knight1.png");
