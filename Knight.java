@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
-public class Knight extends Piece{
+// Class for Knight piece
+public class Knight extends Piece {
    public Knight(char s, int side, int[][] b, ArrayList<BasicFunctions> o){
       x = (side==0)?(64):(512-128);
       y = (s=='W')?(448):0;
