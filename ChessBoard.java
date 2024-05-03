@@ -1,3 +1,7 @@
+// Arjun Garg and Ashwath Muppa
+// Chess: 
+
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -7,21 +11,29 @@ import java.lang.Math;
 
 // Class to create and configure chess board 
 public class ChessBoard extends JPanel{  
-   private char turn = 'W';
-   public static final int FRAME = 512;
-   private static final Color BACKGROUND = new Color(204, 204, 204);
+   // Variables declaration
+   private char turn = 'W';   // Variable to keep track of whose turn it is ('W' for white, 'B' for black)
+   public static final int FRAME = 512;   // Size of the frame
+   private static final Color BACKGROUND = new Color(204, 204, 204);   // Background color of the chess board
    private BufferedImage myImage;
    private Graphics myBuffer;
    private Timer t;
-   private ArrayList<BasicFunctions> animationObjects;
-   private Color darker = new Color(118,150,86);
-   private Color lighter = new Color(238,238,210);
-   public ChessBoard(int[][] b){ 
+   private ArrayList<BasicFunctions> animationObjects;    // List to store chess pieces
+   private Color darker = new Color(118,150,86);   // Darker color for squares on the board
+   private Color lighter = new Color(238,238,210);   // Lighter color for squares on the board
+   
+   // Constructor
+   public ChessBoard(int[][] b){
+      // Initialize image and buffer for drawing
       myImage =  new BufferedImage(FRAME, FRAME, BufferedImage.TYPE_INT_RGB);
       myBuffer = myImage.getGraphics();
       myBuffer.setColor(BACKGROUND);
       myBuffer.fillRect(0,0,FRAME,FRAME);
+
+      // Initialize list for chess pieces
       animationObjects = new ArrayList<BasicFunctions>();
+
+      // Add chess pieces to the list
       animationObjects.add(new King('B',b,animationObjects));
       animationObjects.add(new King('W',b,animationObjects));
       animationObjects.add(new Queen('B',b,animationObjects));
@@ -38,6 +50,8 @@ public class ChessBoard extends JPanel{
          animationObjects.add(new Pawn('W', i, b,animationObjects));
          animationObjects.add(new Pawn('B', i, b,animationObjects));
       }
+
+      // Start timer for animation
       t = new Timer(5, new AnimationListener());
       t.start();
    }
@@ -45,13 +59,15 @@ public class ChessBoard extends JPanel{
       g.drawImage(myImage, 0, 0, getWidth(), getHeight(), null);
    }
 
+   // Methods to set different board colors
    public void setDarker(Color k){
       darker=k;
    }
    public void setLighter(Color k){
       lighter=k;
    }
-   //Draws the board underneath
+   
+   // Method to draw the board underneath
    public void drawBoard(){
       myBuffer.setColor(darker);
       myBuffer.fillRect(0,0,512,512);
@@ -67,10 +83,12 @@ public class ChessBoard extends JPanel{
          }
       }
    }
+
    //Draws the board and each piece
    public void animate(){
       drawBoard();
 
+      // Iterate through each chess piece and animate it
       for(BasicFunctions animationObject : animationObjects){
          animationObject.step();
          animationObject.drawMe(myBuffer);
@@ -121,10 +139,7 @@ public class ChessBoard extends JPanel{
          }
       }
       return false;
-    }
-
-    
-    
+   }
 
    private class AnimationListener implements ActionListener{
       public void actionPerformed(ActionEvent e)
