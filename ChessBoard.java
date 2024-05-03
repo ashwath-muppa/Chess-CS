@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.lang.Math;
 
-
+// Class to create and configure chess board 
 public class ChessBoard extends JPanel{  
    private char turn = 'W';
    public static final int FRAME = 512;
