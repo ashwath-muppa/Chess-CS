@@ -14,6 +14,8 @@ public class ChessBoard extends JPanel{
    private Graphics myBuffer;
    private Timer t;
    private ArrayList<BasicFunctions> animationObjects;
+   private Color darker = new Color(118,150,86);
+   private Color lighter = new Color(238,238,210);
    public ChessBoard(int[][] b){ 
       myImage =  new BufferedImage(FRAME, FRAME, BufferedImage.TYPE_INT_RGB);
       myBuffer = myImage.getGraphics();
@@ -42,11 +44,18 @@ public class ChessBoard extends JPanel{
    public void paintComponent(Graphics g){
       g.drawImage(myImage, 0, 0, getWidth(), getHeight(), null);
    }
+
+   public void setDarker(Color k){
+      darker=k;
+   }
+   public void setLighter(Color k){
+      lighter=k;
+   }
    //Draws the board underneath
    public void drawBoard(){
-      myBuffer.setColor(new Color(118,150,86));
+      myBuffer.setColor(darker);
       myBuffer.fillRect(0,0,512,512);
-      myBuffer.setColor(new Color(238,238,210));
+      myBuffer.setColor(lighter);
       for(int i=0;i<512;i=i+128){
          for(int j=0;j<512;j=j+128){
             myBuffer.fillRect(i,j,64,64);

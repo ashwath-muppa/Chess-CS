@@ -15,11 +15,20 @@ public class ChessPanel extends JPanel{
    //holds piece currently selected
    private int curMX;
    private int curMY;
+   private JComboBox<String> cb;
    public ChessPanel(){
       //adds subpanel and main panel to JPanel
       setLayout(new BorderLayout());
       JPanel east = new JPanel();
-      east.setPreferredSize(new Dimension(188,512));
+      east.add(new JLabel("Select Theme:"));
+      String[] choices = { "Green-White","Blue-White", "Brown-White"};
+
+      cb = new JComboBox<String>(choices);
+      east.add(cb);
+      JButton btn = new JButton("OK");
+      btn.addActionListener(new ButtonListener());
+      east.add(btn);
+      east.setPreferredSize(new Dimension(350,512));
       east.add(new JLabel("(DISCLAMER) You have to"));
       east.add(new JLabel("unselect a piece "));
       east.add(new JLabel("to select a new one."));
@@ -30,6 +39,32 @@ public class ChessPanel extends JPanel{
       display.addMouseListener(new Mouse());
       
    }
+
+
+   private class ButtonListener implements ActionListener
+   {
+      public void actionPerformed(ActionEvent e)
+      {
+         String x = cb.getSelectedItem().toString();
+         switch(x){
+            case "Green-White":
+               display.setDarker(new Color(118,150,86));
+               display.setLighter(new Color(238,238,210));
+               break;
+            case "Blue-White":
+               display.setDarker(new Color(0,68,116));
+               display.setLighter(new Color(238,238,210));
+               break;
+            case "Brown-White":
+               display.setDarker(new Color(145,140,125));
+               display.setLighter(new Color(180,175,165));
+               break;
+         }
+
+
+      }
+   }
+
    //Recieves the mouse input
    private class Mouse extends MouseAdapter{
       public void mouseClicked(MouseEvent e){  
