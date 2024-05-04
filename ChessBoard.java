@@ -1,7 +1,6 @@
 // Arjun Garg and Ashwath Muppa
 // Chess: 
 
-
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -9,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.lang.Math;
 
-// Class to create and configure chess board 
+// Class to create and configure chess board display
 public class ChessBoard extends JPanel{  
    // Variables declaration
    private char turn = 'W';   // Variable to keep track of whose turn it is ('W' for white, 'B' for black)
@@ -95,10 +94,10 @@ public class ChessBoard extends JPanel{
       }        
       repaint();
    }
-   //Updates the board, based on which piece is selected
+   // Updates the board, based on which piece is selected
    public int[] update(int x, int y){
       int [] fin = {0,0,0};
-      System.out.println(turn);
+      System.out.println(turn);   // Prints whose turn it is
       for(BasicFunctions animationObject : animationObjects){  
          int pX = x-animationObject.getX();
          int pY = y-animationObject.getY();
@@ -141,6 +140,7 @@ public class ChessBoard extends JPanel{
       return false;
    }
 
+   // ActionListener for animation
    private class AnimationListener implements ActionListener{
       public void actionPerformed(ActionEvent e)
       {
