@@ -9,6 +9,7 @@ public class Queen extends Piece{
         color=s;
         board = b;
         otherPieces = o;
+        type = "Queen";
     }
     public ArrayList<int[]> legalMoves(){
         ArrayList<int[]> finlegal = new ArrayList<int[]>();

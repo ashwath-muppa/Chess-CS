@@ -10,6 +10,7 @@ public class Rook extends Piece{
         board = b;
         color = s;
         otherPieces = o;
+        type = "Rook";
     }
    
    public ArrayList<int[]> legalMoves(){

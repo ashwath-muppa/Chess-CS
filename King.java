@@ -8,8 +8,23 @@ public class King extends Piece{
       color=s;
       board = b;
       otherPieces = o;
+      type = "King";
    }
-   
+
+   public boolean contains(ArrayList<int[]> arr, int[] el){
+      boolean ret = false;
+      for(int[] each : arr){
+         if(each[0]==el[0] && each[1]==el[1]){
+            ret = true;
+            break;
+         }
+      }
+      return ret;
+   }
+   public boolean check(){
+
+      return true;
+   }
    public ArrayList<int[]> legalMoves(){
       ArrayList<int[]> finlegal = new ArrayList<int[]>();
       ArrayList<int[]> legal = new ArrayList<int[]>();
@@ -44,6 +59,43 @@ public class King extends Piece{
              }
          }
       }
-      return legal;
+      ArrayList<int[]> finalLegal = new ArrayList<int[]>();
+      ArrayList<int[]> otherColor = new ArrayList<int[]>();
+      for(BasicFunctions k : otherPieces){
+          if(k.getColor()!=getColor() && !(k.getType().equals("King"))){
+            //
+            ArrayList<int[]> g = k.legalMoves();
+
+            if(k.getType().equals("Pawn")){
+               if(k.getColor()=='W'){
+                  int[] tmpLeg = {k.getX()-64,k.getY()-64};
+                  otherColor.add(tmpLeg);
+                  int[] tmpLeg1 = {k.getX()+64,k.getY()-64};
+                  otherColor.add(tmpLeg1);
+               }else{
+                  int[] tmpLeg = {k.getX()-64,k.getY()+64};
+                  otherColor.add(tmpLeg);
+                  int[] tmpLeg1 = {k.getX()+64,k.getY()+64};
+                  otherColor.add(tmpLeg1);
+               }
+            }else{
+               for(int[] z : g){
+                  otherColor.add(z);
+               }
+            }
+          }
+       }
+
+      for(int[] other : legal){
+
+         if(!contains(otherColor, other)){
+
+            finalLegal.add(other);
+
+         }
+
+      }
+
+      return finalLegal;
    }
 }

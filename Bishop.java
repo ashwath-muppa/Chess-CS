@@ -9,6 +9,7 @@ public class Bishop extends Piece{
         color = s;
         board = b;
         otherPieces = o;
+        type = "Bishop";
     }
 
     public ArrayList<int[]> legalMoves(){

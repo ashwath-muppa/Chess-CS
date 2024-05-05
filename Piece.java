@@ -17,7 +17,11 @@ public abstract class Piece implements BasicFunctions{
     protected boolean moving=false;
     protected int[][] board;
     protected ArrayList<BasicFunctions> otherPieces;
-
+    protected String type;
+    
+    public String getType(){
+        return type;
+    }
     public int getX(){
         return x;
     }
@@ -63,14 +67,15 @@ public abstract class Piece implements BasicFunctions{
                                                                 }
         active = false;
         moving = true;
+        playAudio((captured)?("capture.wav"):("move.wav"));
         for(BasicFunctions piece : otherPieces){
             if(piece.getX()==x&&piece.getY()==y){
                 captured = true;
                 otherPieces.remove(piece);
                 break;
+                
             }
         }
-        playAudio((captured)?("capture.wav"):("move.wav"));
       }
 
       public static void playAudio(String filename) {

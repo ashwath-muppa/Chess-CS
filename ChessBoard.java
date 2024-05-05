@@ -80,7 +80,6 @@ public class ChessBoard extends JPanel{
    //Updates the board, based on which piece is selected
    public int[] update(int x, int y){
       int [] fin = {0,0,0};
-      System.out.println(turn);
       for(BasicFunctions animationObject : animationObjects){  
          int pX = x-animationObject.getX();
          int pY = y-animationObject.getY();
@@ -121,10 +120,7 @@ public class ChessBoard extends JPanel{
          }
       }
       return false;
-    }
-
-    
-    
+    }    
 
    private class AnimationListener implements ActionListener{
       public void actionPerformed(ActionEvent e)

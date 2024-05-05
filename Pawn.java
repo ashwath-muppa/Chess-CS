@@ -10,6 +10,7 @@ public class Pawn extends Piece{
         color=s;
         board=b;
         otherPieces = o;
+        type = "Pawn";
     }
     public ArrayList<int[]> legalMoves(){
         ArrayList<int[]> legal = new ArrayList<int[]>();
