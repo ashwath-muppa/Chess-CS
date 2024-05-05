@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.sound.sampled.*;
 import java.io.*;
 
+// Abstract class to be implemented by all board pieces
 public abstract class Piece implements BasicFunctions{
     protected int x;
     protected int y;
