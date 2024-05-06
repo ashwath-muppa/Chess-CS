@@ -19,7 +19,10 @@ public abstract class Piece implements BasicFunctions{
     protected int[][] board;
     protected ArrayList<BasicFunctions> otherPieces;
     protected String type;
-    
+
+    public boolean getActive(){
+        return active;
+    }
     public String getType(){
         return type;
     }

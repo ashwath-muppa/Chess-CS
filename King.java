@@ -61,11 +61,10 @@ public class King extends Piece{
       }
       ArrayList<int[]> finalLegal = new ArrayList<int[]>();
       ArrayList<int[]> otherColor = new ArrayList<int[]>();
+      
       for(BasicFunctions k : otherPieces){
-          if(k.getColor()!=getColor() && !(k.getType().equals("King"))){
-            //
+          if(k.getColor()!=getColor() && (!k.getActive())){
             ArrayList<int[]> g = k.legalMoves();
-
             if(k.getType().equals("Pawn")){
                if(k.getColor()=='W'){
                   int[] tmpLeg = {k.getX()-64,k.getY()-64};
@@ -83,9 +82,8 @@ public class King extends Piece{
                   otherColor.add(z);
                }
             }
-          }
+         }
        }
-
       for(int[] other : legal){
 
          if(!contains(otherColor, other)){

@@ -10,4 +10,5 @@ public interface BasicFunctions{
    public ArrayList<int[]> legalMoves();
    public void setMove(int x, int y);
    public String getType();
+   public boolean getActive();
 }
