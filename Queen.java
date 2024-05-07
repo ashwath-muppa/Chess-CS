@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Queen extends Piece{
    
-    public Queen(char s, int[][] b, ArrayList<BasicFunctions> o){
+    public Queen(char s, int[][] b, ArrayList<ChessPiece> o){
         x = 192;
         y = (s=='W')?(448):0;
         file = (s=='W')?("pieces/queen.png"):("pieces/queen1.png");
@@ -93,7 +93,7 @@ public class Queen extends Piece{
         }
 
         for(int[] leg : finlegal){
-            for(BasicFunctions k : otherPieces){
+            for(ChessPiece k : otherPieces){
                 if(k.getY()==leg[1] && k.getX()==leg[0] && k.getColor()!=getColor()){
                     legal.add(leg);
                 }
@@ -101,6 +101,82 @@ public class Queen extends Piece{
         }
 
       return legal;
+    }
+
+    public ArrayList<int[]> protectedPieces(){
+        ArrayList<int[]> finlegal = new ArrayList<int[]>();
+        ArrayList<int[]> legal = new ArrayList<int[]>();
+
+        int tmX = (int)(Math.floor(getX()/64));
+        int tmY = (int)(Math.floor(getY()/64));
+
+        for(int i=tmX+1;i<8;i++){
+            if(board[tmY][i]==1){
+                int[] curLegal = {i*64, tmY*64};
+                legal.add(curLegal);
+                break;
+            }
+        }
+          for(int i=tmX-1;i>=0;i--){
+            if(board[tmY][i]==1){
+                int[] curLegal = {i*64, tmY*64};
+                legal.add(curLegal);
+                break;
+            }
+          }
+          for(int i=tmY-1;i>=0;i--){
+            if(board[i][tmX]==1){
+                int[] curLegal = {tmX*64, i*64};
+                legal.add(curLegal);
+                break;
+            }
+          }
+          for(int i=tmY+1;i<8;i++){
+            if(board[i][tmX]==1){
+                int[] curLegal = {tmX*64, i*64};
+                legal.add(curLegal);
+                break;
+            }
+          }
+          for(int i=1;i<8;i++){
+            if((tmX+i>7 || tmY-i<0)||(board[tmY-i][tmX+i]==1)){
+                int[] curLegal = {(tmX+i)*64, (tmY-i)*64};
+                legal.add(curLegal);
+                break;
+            }
+        }
+
+        for(int i=1;i<8;i++){
+            if((tmX-i<0 || tmY-i<0)||(board[tmY-i][tmX-i]==1)){
+                int[] curLegal = {(tmX-i)*64, (tmY-i)*64};
+                legal.add(curLegal);
+                break;
+            }
+        }
+        for(int i=1;i<8;i++){
+            if((tmX+i>7 || tmY+i>7)||(board[tmY+i][tmX+i]==1)){
+                int[] curLegal = {(tmX+i)*64, (tmY+i)*64};
+                legal.add(curLegal);
+                break;
+            }
+        }
+        for(int i=1;i<8;i++){
+            if((tmX-i<0 || tmY+i>7)||(board[tmY+i][tmX-i]==1)){
+                int[] curLegal = {(tmX-i)*64, (tmY+i)*64};
+                legal.add(curLegal);
+                break;
+            }
+        }
+
+        for(int[] leg : legal){
+            for(ChessPiece k : otherPieces){
+                if(k.getY()==leg[1] && k.getX()==leg[0] && k.getColor()==getColor()){
+                    finlegal.add(leg);
+                }
+            }
+        }
+
+      return finlegal;
     }
 
 

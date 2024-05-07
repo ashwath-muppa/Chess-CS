@@ -5,7 +5,7 @@ import javax.sound.sampled.*;
 import java.io.*;
 
 // Abstract class to be implemented by all board pieces
-public abstract class Piece implements BasicFunctions{
+public abstract class Piece implements ChessPiece{
     protected int x;
     protected int y;
     protected int destY;
@@ -17,7 +17,7 @@ public abstract class Piece implements BasicFunctions{
     protected char color;
     protected boolean moving=false;
     protected int[][] board;
-    protected ArrayList<BasicFunctions> otherPieces;
+    protected ArrayList<ChessPiece> otherPieces;
     protected String type;
 
     public boolean getActive(){
@@ -71,8 +71,7 @@ public abstract class Piece implements BasicFunctions{
                                                                 }
         active = false;
         moving = true;
-        playAudio((captured)?("capture.wav"):("move.wav"));
-        for(BasicFunctions piece : otherPieces){
+        for(ChessPiece piece : otherPieces){
             if(piece.getX()==x&&piece.getY()==y){
                 captured = true;
                 otherPieces.remove(piece);
@@ -80,6 +79,7 @@ public abstract class Piece implements BasicFunctions{
                 
             }
         }
+        playAudio((captured)?("capture.wav"):("move.wav"));
       }
 
       public static void playAudio(String filename) {
@@ -135,5 +135,6 @@ public abstract class Piece implements BasicFunctions{
          }
     }
     public abstract ArrayList<int[]> legalMoves();
+    public abstract ArrayList<int[]> protectedPieces();
 
 }

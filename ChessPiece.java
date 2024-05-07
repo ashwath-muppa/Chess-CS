@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
-public interface BasicFunctions{
+public interface ChessPiece{
    public void step();
    public char getColor();
    public void drawMe(Graphics g);
@@ -11,4 +11,5 @@ public interface BasicFunctions{
    public void setMove(int x, int y);
    public String getType();
    public boolean getActive();
+   public ArrayList<int[]> protectedPieces();
 }

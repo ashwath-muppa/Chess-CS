@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class King extends Piece{
-   public King(char s, int[][] b, ArrayList<BasicFunctions> o){
+   public King(char s, int[][] b, ArrayList<ChessPiece> o){
       x = 256;
       y = (s=='W')?(448):0;
       file = (s=='W')?("pieces/king.png"):("pieces/king1.png");
@@ -51,7 +51,7 @@ public class King extends Piece{
          }
       }
       for(int[] leg : finlegal){
-         for(BasicFunctions k : otherPieces){
+         for(ChessPiece k : otherPieces){
              if(k.getY()==(leg[1]*64) && k.getX()==(leg[0]*64) && k.getColor()!=getColor()){
                  leg[0]*=64;
                  leg[1]*=64;
@@ -62,9 +62,10 @@ public class King extends Piece{
       ArrayList<int[]> finalLegal = new ArrayList<int[]>();
       ArrayList<int[]> otherColor = new ArrayList<int[]>();
       
-      for(BasicFunctions k : otherPieces){
+      for(ChessPiece k : otherPieces){
           if(k.getColor()!=getColor() && (!k.getActive())){
             ArrayList<int[]> g = k.legalMoves();
+            ArrayList<int[]> h = k.protectedPieces();
             if(k.getType().equals("Pawn")){
                if(k.getColor()=='W'){
                   int[] tmpLeg = {k.getX()-64,k.getY()-64};
@@ -77,9 +78,31 @@ public class King extends Piece{
                   int[] tmpLeg1 = {k.getX()+64,k.getY()+64};
                   otherColor.add(tmpLeg1);
                }
-            }else{
+            }else if(k.getType().equals("King")){
+               int otmX = (int)(Math.floor(k.getX()/64));
+               int otmY = (int)(Math.floor(k.getY()/64));
+               int[][] otherKingsProtected = {{otmX+1,otmY},
+                                             {otmX-1,otmY},
+                                             {otmX,otmY+1},
+                                             {otmX,otmY-1},
+                                             {otmX+1,otmY+1},
+                                             {otmX+1,otmY-1},
+                                             {otmX-1,otmY+1},
+                                             {otmX-1,otmY-1}};
+                      for(int[] othermove: otherKingsProtected){
+                        othermove[0]*=64;
+                        othermove[1]*=64;
+                        otherColor.add(othermove);
+                      }
+            }
+            
+            
+            else{
                for(int[] z : g){
                   otherColor.add(z);
+               }
+               for(int[] q : h){
+                  otherColor.add(q);
                }
             }
          }
@@ -95,5 +118,40 @@ public class King extends Piece{
       }
 
       return finalLegal;
+   }
+
+
+   public ArrayList<int[]> protectedPieces(){
+      ArrayList<int[]> finlegal = new ArrayList<int[]>();
+      ArrayList<int[]> legal = new ArrayList<int[]>();
+
+      int tmX = (int)(Math.floor(getX()/64));
+      int tmY = (int)(Math.floor(getY()/64));
+      int[][] moves = {{tmX+1,tmY},
+                      {tmX-1,tmY},
+                      {tmX,tmY+1},
+                      {tmX,tmY-1},
+                      {tmX+1,tmY+1},
+                      {tmX+1,tmY-1},
+                      {tmX-1,tmY+1},
+                      {tmX-1,tmY-1}};
+      for(int i=0;i<8;i++){
+         int[] tmp = moves[i];
+         if(tmp[0]>=0&&tmp[0]<8&&tmp[1]>=0&&tmp[1]<8){
+            if(board[tmp[1]][tmp[0]]==1){
+                  finlegal.add(tmp); 
+            }
+         }
+      }
+      for(int[] leg : finlegal){
+         for(ChessPiece k : otherPieces){
+             if(k.getY()==(leg[1]*64) && k.getX()==(leg[0]*64) && k.getColor()==getColor()){
+                 leg[0]*=64;
+                 leg[1]*=64;
+                 legal.add(leg);
+             }
+         }
+      }
+      return finlegal;
    }
 }

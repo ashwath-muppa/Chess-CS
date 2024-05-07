@@ -3,7 +3,7 @@ import java.lang.Math;
 
 public class Pawn extends Piece{
 
-    public Pawn(char s, int i, int[][] b,ArrayList<BasicFunctions> o){
+    public Pawn(char s, int i, int[][] b,ArrayList<ChessPiece> o){
         x = i*64;
         y = (s=='W')?(384):64;
         file = (s=='W')?("pieces/pawn.png"):("pieces/pawn1.png");
@@ -42,7 +42,7 @@ public class Pawn extends Piece{
             int[][] captures = {{tmX-1,tmY-1},
                                 {tmX+1,tmY-1}};
             for(int[] leg : captures){
-                for(BasicFunctions k : otherPieces){
+                for(ChessPiece k : otherPieces){
                     if(k.getY()==(leg[1]*64) && k.getX()==(leg[0]*64) && k.getColor()!=getColor()){
                         leg[0]*=64;
                         leg[1]*=64;
@@ -77,7 +77,7 @@ public class Pawn extends Piece{
             int[][] captures = {{tmX-1,tmY+1},
                                 {tmX+1,tmY+1}};
             for(int[] leg : captures){
-                for(BasicFunctions k : otherPieces){
+                for(ChessPiece k : otherPieces){
                     if(k.getY()==(leg[1]*64) && k.getX()==(leg[0]*64) && k.getColor()!=getColor()){
                         leg[0]*=64;
                         leg[1]*=64;
@@ -91,4 +91,14 @@ public class Pawn extends Piece{
 
         return legal;
     }
+
+
+    //there is no need write logic here, because the pawns moves are recorded in king already specially
+    public ArrayList<int[]> protectedPieces(){
+        ArrayList<int[]> finlegal = new ArrayList<int[]>();
+
+        return finlegal;
+    }
+
+
 }

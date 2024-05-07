@@ -17,7 +17,7 @@ public class ChessBoard extends JPanel{
    private BufferedImage myImage;
    private Graphics myBuffer;
    private Timer t;
-   private ArrayList<BasicFunctions> animationObjects;    // List to store chess pieces
+   private ArrayList<ChessPiece> animationObjects;    // List to store chess pieces
    private Color darker = new Color(118,150,86);   // Darker color for squares on the board
    private Color lighter = new Color(238,238,210);   // Lighter color for squares on the board
    
@@ -30,7 +30,7 @@ public class ChessBoard extends JPanel{
       myBuffer.fillRect(0,0,FRAME,FRAME);
 
       // Initialize list for chess pieces
-      animationObjects = new ArrayList<BasicFunctions>();
+      animationObjects = new ArrayList<ChessPiece>();
 
       // Add chess pieces to the list
       animationObjects.add(new King('B',b,animationObjects));
@@ -88,7 +88,7 @@ public class ChessBoard extends JPanel{
       drawBoard();
 
       // Iterate through each chess piece and animate it
-      for(BasicFunctions animationObject : animationObjects){
+      for(ChessPiece animationObject : animationObjects){
          animationObject.step();
          animationObject.drawMe(myBuffer);
       }        
@@ -97,7 +97,7 @@ public class ChessBoard extends JPanel{
    // Updates the board, based on which piece is selected
    public int[] update(int x, int y){
       int [] fin = {0,0,0};
-      for(BasicFunctions animationObject : animationObjects){  
+      for(ChessPiece animationObject : animationObjects){  
          int pX = x-animationObject.getX();
          int pY = y-animationObject.getY();
          
@@ -116,7 +116,7 @@ public class ChessBoard extends JPanel{
    //Checks if user inputted legal move for that piece, and makes move if legal
    //returns a boolean so that the panel can set its field accordingly
    public boolean legalMove(int x, int y, int curx, int cury){
-      for(BasicFunctions animationObject : animationObjects){  
+      for(ChessPiece animationObject : animationObjects){  
          int pX = animationObject.getX();
          int pY = animationObject.getY();
          if(pX==curx && pY==cury){
