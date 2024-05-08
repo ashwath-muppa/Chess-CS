@@ -85,6 +85,7 @@ public class ChessBoard extends JPanel{
 
    //Draws the board and each piece
    public void animate(){
+      //re draws board to account for if the user changes the theme midway
       drawBoard();
 
       // Iterate through each chess piece and animate it
@@ -116,26 +117,37 @@ public class ChessBoard extends JPanel{
    //Checks if user inputted legal move for that piece, and makes move if legal
    //returns a boolean so that the panel can set its field accordingly
    public boolean legalMove(int x, int y, int curx, int cury){
+      //iterates through all pieces
       for(ChessPiece animationObject : animationObjects){  
+         //stores current pieces position
          int pX = animationObject.getX();
          int pY = animationObject.getY();
+         //if there is a piece where the user clicked
          if(pX==curx && pY==cury){
+            //get the legal moves for that piece
             ArrayList<int[]> moves = animationObject.legalMoves();
+            //iterate through the moves for that piece
             for(int[] move : moves){
+               //store the individual x and y values
                int mX = x-move[0];
                int mY = y-move[1];
+               //if the values are in the square
                if(mX>0&&mX<64&&mY>0&&mY<64){
+                     //set the move
                      animationObject.setMove((int)(Math.floor(x/64)*64), (int)(Math.floor(y/64)*64));
+                     //change the turn
                      if(turn=='W'){
                         turn='B';
                      }else{
                         turn='W';
                      }
+                     //return true if the piece has been set
                      return true;
                }
             }
          }
       }
+      //return false if the piece has not been set
       return false;
     }  
     

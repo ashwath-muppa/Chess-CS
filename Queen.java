@@ -167,7 +167,6 @@ public class Queen extends Piece{
                 break;
             }
         }
-
         for(int[] leg : legal){
             for(ChessPiece k : otherPieces){
                 if(k.getY()==leg[1] && k.getX()==leg[0] && k.getColor()==getColor()){
@@ -175,7 +174,6 @@ public class Queen extends Piece{
                 }
             }
         }
-
       return finlegal;
     }
 

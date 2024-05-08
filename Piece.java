@@ -6,60 +6,88 @@ import java.io.*;
 
 // Abstract class to be implemented by all board pieces
 public abstract class Piece implements ChessPiece{
+    //x and y of the piece
     protected int x;
     protected int y;
+    //the desination that the pieces must reach
     protected int destY;
     protected int destX;
+    //the speed of the x and y values
     protected int dY = 4;
     protected int dX = 4;
+    //the file for the chess piece
     protected String file;
+    //the piece is active (default starts from false)
     protected boolean active = false;
+    //Color of the piece
     protected char color;
+    //the piece is moving (default starts from false)
     protected boolean moving=false;
+    //stores if there is a piece present in a position of the board or not
     protected int[][] board;
+    //contains the array list of all the other pieces
     protected ArrayList<ChessPiece> otherPieces;
+    //stores the type of the piece
     protected String type;
 
+    //gets the state if the piece is active or not
     public boolean getActive(){
         return active;
     }
+    //gets the type of piece
     public String getType(){
         return type;
     }
+    //gets the current x value
     public int getX(){
         return x;
     }
+    //gets the current y value
     public int getY(){
         return y;
     }
+    //gets the change (speed) in y of the piece
     public int getdY(){
         return dY;
     }
+    //gets the change (speed) in x of the piece
     public int getdX(){
         return dX;
     }
+    //set the destination x value it needs to reach
     public void setDestX(int xValue){
         destX = xValue;
     }
+    //set the destination y value it needs to reach
     public void setDestY(int yValue){
         destY = yValue;
     }
+    //set the x value of the piece
     public void setX(int xValue){
         x = xValue;
     }
+    //set the y value of the piece
     public void setY(int yValue){
         y = yValue;
     }
+    //get the color of the piece, W for white and B for black
     public char getColor(){
         return color;
     }
+
+    //method to set move to x and y cords provided
     public void setMove(int x, int y){
+        //we dont know if piece captured anything yet so set it to false
         boolean captured = false;
+        //set the desination values
         setDestX(x);
         setDestY(y);
+        //the piece will move, so set the state at the current place to 0
         board[(int)(Math.floor(getY()/64))][(int)(Math.floor(getX()/64))]=0;
+        //convert cords on panel to indexes
         int tpY = (int)(Math.floor(x/64));
         int tpX = (int)(Math.floor(y/64));
+        //set the new place to 1
         board[tpX][tpY]=1;
                                                                 //temporary debug code to print board state to terminal each move
                                                                 System.out.println("\n\n\n");
@@ -69,61 +97,73 @@ public abstract class Piece implements ChessPiece{
                                                                     }
                                                                     System.out.print("\n");
                                                                 }
+        //piece is no longer active
         active = false;
+        //piece should now be moving towards destination
         moving = true;
+        //check for captures
         for(ChessPiece piece : otherPieces){
+            //if x and y values of another piece match the desination values
             if(piece.getX()==x&&piece.getY()==y){
+                //set captured to true and remove the piece from the array list
                 captured = true;
                 otherPieces.remove(piece);
                 break;
                 
             }
         }
+        //play the audio depending on wether it captured a piece of not
         playAudio((captured)?("capture.wav"):("move.wav"));
       }
 
       public static void playAudio(String filename) {
         try {
-            File audioFile = new File(filename);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            File audioFile = new File(filename); // opens file
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile); // convert to audio file
   
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);
+            Clip clip = AudioSystem.getClip(); // get audio clip
+            clip.open(audioStream); // open audio clip
   
-            clip.start();
-        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
-            ex.printStackTrace();
+            clip.start(); // play clip
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) { // catch any errors
+            ex.printStackTrace(); // print errors
         }
     }
-    
-
     public void drawMe(Graphics g)
     {  
-    if(active){
+    if(active){ // if piece is active, highlight legal moves
         g.setColor(new Color(0,255,0,128));
         g.fillRect(getX(), getY(),64,64);
         for(int[] k : legalMoves()){
             g.fillRect((int)(Math.floor(k[0]/64)*64), (int)(Math.floor(k[1]/64)*64),64,64);
         }
     }
-      ImageIcon piece = new ImageIcon(file);
+
+      ImageIcon piece = new ImageIcon(file); // draw the piece
       g.drawImage(piece.getImage(),getX(), getY(), 64,64,null);
     }
 
-    
+    // activates and deactivates
     public void activate(){
         active = !active;
     }
+    //animation
     public void step(){
+        //if it has not reached destination yet
         if(moving){
+            //if the desination is greater than cur y
             if(destY>y){
+                  //increment y
                   setY(getY()+getdY());
-            }else{
-                  setY(getY()-getdY());
+            }else{ // if the desination is less than cur y
+
+                  setY(getY()-getdY()); // decrement y
             }
+            //if reached desination, set moving to false
             if(destX==x&&destY==y){
                   moving=false;
             }
+            //same as y, but with x
             if(destX>x){
                   setX(getX()+getdX());
             }else if(destX<x){
@@ -132,8 +172,10 @@ public abstract class Piece implements ChessPiece{
             if(destX==x&&destY==y){
                   moving=false;
             }
-         }
+        }
     }
+
+    //abstract classes that each type of piece defines for itself
     public abstract ArrayList<int[]> legalMoves();
     public abstract ArrayList<int[]> protectedPieces();
 

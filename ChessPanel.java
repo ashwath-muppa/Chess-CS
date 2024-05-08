@@ -20,12 +20,13 @@ public class ChessPanel extends JPanel{
       //adds subpanel and main panel to JPanel
       setLayout(new BorderLayout());
       JPanel east = new JPanel();
-      east.add(new JLabel("Select Theme:"));
+      east.add(new JLabel("Select Background:"));
       String[] choices = { "Green-White","Blue-White", "Brown-White"};
-
       cb = new JComboBox<String>(choices);
       east.add(cb);
       JButton btn = new JButton("OK");
+
+      
       btn.addActionListener(new ButtonListener());
       east.add(btn);
       east.setPreferredSize(new Dimension(350,512));

@@ -13,8 +13,11 @@ public class Bishop extends Piece{
     }
 
     public ArrayList<int[]> legalMoves(){
+        //stores final legal moves
         ArrayList<int[]> finlegal = new ArrayList<int[]>();
+        //stores temp legal moves
         ArrayList<int[]> legal = new ArrayList<int[]>();
+        
         int tmX = (int)(Math.floor(getX()/64));
         int tmY = (int)(Math.floor(getY()/64));
         for(int i=1;i<8;i++){
