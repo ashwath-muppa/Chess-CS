@@ -66,7 +66,7 @@ public class ChessBoard extends JPanel{
       lighter=k;
    }
    
-   // Method to draw the board underneath
+   // Method to draw the board underneath 
    public void drawBoard(){
       myBuffer.setColor(darker);
       myBuffer.fillRect(0,0,512,512);

@@ -25,8 +25,6 @@ public class ChessPanel extends JPanel{
       cb = new JComboBox<String>(choices);
       east.add(cb);
       JButton btn = new JButton("OK");
-
-      
       btn.addActionListener(new ButtonListener());
       east.add(btn);
       east.setPreferredSize(new Dimension(350,512));
