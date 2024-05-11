@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Queen extends Piece{
    
-    public Queen(char s, int[][] b, ArrayList<ChessPiece> o){
+    public Queen(char s, int[][] b, ArrayList<ChessPiece> o,CapturedPieces cap){
         x = 192;
         y = (s=='W')?(448):0;
         file = (s=='W')?("pieces/queen.png"):("pieces/queen1.png");
@@ -10,6 +10,7 @@ public class Queen extends Piece{
         board = b;
         otherPieces = o;
         type = "Queen";
+        cappanel = cap;
     }
     public ArrayList<int[]> legalMoves(){
         ArrayList<int[]> finlegal = new ArrayList<int[]>();

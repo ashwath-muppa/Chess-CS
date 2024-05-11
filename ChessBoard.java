@@ -22,7 +22,7 @@ public class ChessBoard extends JPanel{
    private Color lighter = new Color(238,238,210);   // Lighter color for squares on the board
    
    // Constructor
-   public ChessBoard(int[][] b){
+   public ChessBoard(int[][] b, CapturedPieces cap){
       // Initialize image and buffer for drawing
       myImage =  new BufferedImage(FRAME, FRAME, BufferedImage.TYPE_INT_RGB);
       myBuffer = myImage.getGraphics();
@@ -33,21 +33,21 @@ public class ChessBoard extends JPanel{
       animationObjects = new ArrayList<ChessPiece>();
 
       // Add chess pieces to the list
-      animationObjects.add(new King('B',b,animationObjects));
-      animationObjects.add(new King('W',b,animationObjects));
-      animationObjects.add(new Queen('B',b,animationObjects));
-      animationObjects.add(new Queen('W',b,animationObjects));
+      animationObjects.add(new King('B',b,animationObjects, cap));
+      animationObjects.add(new King('W',b,animationObjects,cap));
+      animationObjects.add(new Queen('B',b,animationObjects,cap));
+      animationObjects.add(new Queen('W',b,animationObjects,cap));
       for(int i=0;i<8;i++){
          if(i<2){
-            animationObjects.add(new Rook('W', i, b,animationObjects));
-            animationObjects.add(new Rook('B', i, b,animationObjects));
-            animationObjects.add(new Bishop('W', i, b,animationObjects));
-            animationObjects.add(new Bishop('B', i, b,animationObjects));
-            animationObjects.add(new Knight('W', i, b,animationObjects));
-            animationObjects.add(new Knight('B', i, b,animationObjects));
+            animationObjects.add(new Rook('W', i, b,animationObjects,cap));
+            animationObjects.add(new Rook('B', i, b,animationObjects,cap));
+            animationObjects.add(new Bishop('W', i, b,animationObjects,cap));
+            animationObjects.add(new Bishop('B', i, b,animationObjects,cap));
+            animationObjects.add(new Knight('W', i, b,animationObjects,cap));
+            animationObjects.add(new Knight('B', i, b,animationObjects,cap));
          }
-         animationObjects.add(new Pawn('W', i, b,animationObjects));
-         animationObjects.add(new Pawn('B', i, b,animationObjects));
+         animationObjects.add(new Pawn('W', i, b,animationObjects,cap));
+         animationObjects.add(new Pawn('B', i, b,animationObjects,cap));
       }
 
       // Start timer for animation

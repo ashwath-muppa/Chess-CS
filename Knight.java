@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 // Class for Knight piece
 public class Knight extends Piece {
-   public Knight(char s, int side, int[][] b, ArrayList<ChessPiece> o){
+   public Knight(char s, int side, int[][] b, ArrayList<ChessPiece> o,CapturedPieces cap){
       x = (side==0)?(64):(512-128);
       y = (s=='W')?(448):0;
       file = (s=='W')?("pieces/knight.png"):("pieces/knight1.png");
@@ -10,6 +10,7 @@ public class Knight extends Piece {
       board = b;
       otherPieces = o;
       type = "Knight";
+      cappanel = cap;
    }
    
    public ArrayList<int[]> legalMoves(){

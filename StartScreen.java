@@ -63,7 +63,7 @@ public class StartScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 parentFrame.setVisible(false);
                 JFrame gameFrame = new JFrame("Chess");
-                gameFrame.setSize(862, 537);
+                gameFrame.setSize(862, 537+75);
                 gameFrame.setLocationRelativeTo(null);
                 gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 gameFrame.setContentPane(new ChessPanel());

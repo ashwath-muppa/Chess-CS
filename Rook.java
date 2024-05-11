@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Rook extends Piece{
 
-    public Rook(char s, int side, int[][] b, ArrayList<ChessPiece> o)
+    public Rook(char s, int side, int[][] b, ArrayList<ChessPiece> o,CapturedPieces cap)
     {
         x = (side==0)?(0):(448);
         y = (s=='W')?(448):0;
@@ -11,6 +11,7 @@ public class Rook extends Piece{
         color = s;
         otherPieces = o;
         type = "Rook";
+        cappanel = cap;
     }
    
    public ArrayList<int[]> legalMoves(){

@@ -30,6 +30,8 @@ public abstract class Piece implements ChessPiece{
     //stores the type of the piece
     protected String type;
 
+    protected CapturedPieces cappanel;
+
     //gets the state if the piece is active or not
     public boolean getActive(){
         return active;
@@ -75,6 +77,10 @@ public abstract class Piece implements ChessPiece{
         return color;
     }
 
+    public String getFile(){
+        return file;
+    }
+
     //method to set move to x and y cords provided
     public void setMove(int x, int y){
         //we dont know if piece captured anything yet so set it to false
@@ -107,6 +113,10 @@ public abstract class Piece implements ChessPiece{
             if(piece.getX()==x&&piece.getY()==y){
                 //set captured to true and remove the piece from the array list
                 captured = true;
+                cappanel.addPiece(piece);
+                if(piece.getType().equals("King")){
+                    
+                }
                 otherPieces.remove(piece);
                 break;
                 

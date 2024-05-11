@@ -31,8 +31,14 @@ public class ChessPanel extends JPanel{
       east.add(new JLabel("(DISCLAMER) You have to"));
       east.add(new JLabel("unselect a piece "));
       east.add(new JLabel("to select a new one."));
+
+      CapturedPieces south = new CapturedPieces();
+      south.setFocusable(true);
+      add(south,BorderLayout.SOUTH);
+      south.setPreferredSize(new Dimension(862,75));
+
       add(east,BorderLayout.EAST);
-      display = new ChessBoard(piecesBoard);
+      display = new ChessBoard(piecesBoard, south);
       display.setFocusable(true);
       add(display,BorderLayout.CENTER);
       display.addMouseListener(new Mouse());

@@ -3,7 +3,7 @@ import java.lang.Math;
 
 public class Pawn extends Piece{
 
-    public Pawn(char s, int i, int[][] b,ArrayList<ChessPiece> o){
+    public Pawn(char s, int i, int[][] b,ArrayList<ChessPiece> o,CapturedPieces cap){
         x = i*64;
         y = (s=='W')?(384):64;
         file = (s=='W')?("pieces/pawn.png"):("pieces/pawn1.png");
@@ -11,6 +11,7 @@ public class Pawn extends Piece{
         board=b;
         otherPieces = o;
         type = "Pawn";
+        cappanel = cap;
     }
     public ArrayList<int[]> legalMoves(){
         ArrayList<int[]> legal = new ArrayList<int[]>();

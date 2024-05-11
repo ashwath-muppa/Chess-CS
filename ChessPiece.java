@@ -6,6 +6,7 @@ public interface ChessPiece{
    public void drawMe(Graphics g);
    public int getX();
    public int getY();
+   public String getFile();
    public void activate();
    public ArrayList<int[]> legalMoves();
    public void setMove(int x, int y);

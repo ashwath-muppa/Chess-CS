@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class King extends Piece{
-   public King(char s, int[][] b, ArrayList<ChessPiece> o){
+   public King(char s, int[][] b, ArrayList<ChessPiece> o, CapturedPieces cap){
       x = 256;
       y = (s=='W')?(448):0;
       file = (s=='W')?("pieces/king.png"):("pieces/king1.png");
@@ -9,6 +9,7 @@ public class King extends Piece{
       board = b;
       otherPieces = o;
       type = "King";
+      cappanel = cap;
    }
 
    public boolean contains(ArrayList<int[]> arr, int[] el){

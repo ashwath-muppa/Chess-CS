@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Bishop extends Piece{
    
-    public Bishop(char s, int side, int[][] b, ArrayList<ChessPiece> o){
+    public Bishop(char s, int side, int[][] b, ArrayList<ChessPiece> o,CapturedPieces cap){
         x = (side==0)?(128):(320);
         y = (s=='W')?(448):0;
         file = (s=='W')?("pieces/bishop.png"):("pieces/bishop1.png");
@@ -10,6 +10,7 @@ public class Bishop extends Piece{
         board = b;
         otherPieces = o;
         type = "Bishop";
+        cappanel = cap;
     }
 
     public ArrayList<int[]> legalMoves(){
@@ -17,7 +18,7 @@ public class Bishop extends Piece{
         ArrayList<int[]> finlegal = new ArrayList<int[]>();
         //stores temp legal moves
         ArrayList<int[]> legal = new ArrayList<int[]>();
-        
+
         int tmX = (int)(Math.floor(getX()/64));
         int tmY = (int)(Math.floor(getY()/64));
         for(int i=1;i<8;i++){
