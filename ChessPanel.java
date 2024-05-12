@@ -16,21 +16,33 @@ public class ChessPanel extends JPanel{
    private int curMX;
    private int curMY;
    private JComboBox<String> cb;
+   private JLabel turn;
    public ChessPanel(){
       //adds subpanel and main panel to JPanel
       setLayout(new BorderLayout());
       JPanel east = new JPanel();
-      east.add(new JLabel("Select Background:"));
-      String[] choices = { "Green-White","Blue-White", "Brown-White"};
-      cb = new JComboBox<String>(choices);
-      east.add(cb);
-      JButton btn = new JButton("OK");
-      btn.addActionListener(new ButtonListener());
-      east.add(btn);
-      east.setPreferredSize(new Dimension(350,512));
-      east.add(new JLabel("(DISCLAMER) You have to"));
-      east.add(new JLabel("unselect a piece "));
-      east.add(new JLabel("to select a new one."));
+      east.setLayout(new GridLayout(15,1));
+      JLabel title = new JLabel("Welcome To Chess!");
+      title.setFont(new Font(Font.SERIF, Font.ITALIC, 35));
+      title.setHorizontalAlignment(SwingConstants.CENTER);
+      title.setBackground(Color.BLACK);
+      title.setOpaque(true);
+      title.setForeground(Color.WHITE);
+      east.add(title);
+      JTextArea inst = new JTextArea("(DISCLAMER) You have to unselect a piece to select a \nnew one");
+      inst.setBackground(Color.GRAY);
+      inst.setEditable(false);
+      east.add(inst);
+       east.add(new JLabel("Select Background:"));
+       String[] choices = { "Green-White","Blue-White", "Brown-White"};
+       cb = new JComboBox<String>(choices);
+       east.add(cb);
+       JButton btn = new JButton("OK");
+       btn.addActionListener(new ButtonListener());
+       east.add(btn);
+       east.setPreferredSize(new Dimension(350,512));
+       turn = new JLabel("White to Play");
+       east.add(turn);
 
       CapturedPieces south = new CapturedPieces();
       south.setFocusable(true);
@@ -94,6 +106,11 @@ public class ChessPanel extends JPanel{
             //move to there and no more pieces are active now
              else if(display.legalMove(e.getX(), e.getY(), curMX, curMY)){
                pieceActive = false;
+               if(turn.getText().substring(0,5).equals("White")){
+                  turn.setText("Black to Play");
+               }else{
+                  turn.setText("White to Play");
+               }
             }
          }
       }
