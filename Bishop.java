@@ -12,6 +12,16 @@ public class Bishop extends Piece{
         type = "Bishop";
         cappanel = cap;
     }
+    public Bishop(int x1, int y1, char s, int[][] b, ArrayList<ChessPiece> o,CapturedPieces cap){
+        x = x1;
+        y = y1;
+        file = (s=='W')?("pieces/bishop.png"):("pieces/bishop1.png");
+        color = s;
+        board = b;
+        otherPieces = o;
+        type = "Bishop";
+        cappanel = cap;
+    }
 
     public ArrayList<int[]> legalMoves(){
         //stores final legal moves

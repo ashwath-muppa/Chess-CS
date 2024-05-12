@@ -76,13 +76,4 @@ public class StartScreen extends JPanel {
         add(inputPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
     }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Chess Start Screen");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new StartScreen(frame));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
 }

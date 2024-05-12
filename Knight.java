@@ -12,6 +12,16 @@ public class Knight extends Piece {
       type = "Knight";
       cappanel = cap;
    }
+   public Knight(int x1, int y1,char s, int[][] b, ArrayList<ChessPiece> o,CapturedPieces cap){
+      x = x1;
+      y = y1;
+      file = (s=='W')?("pieces/knight.png"):("pieces/knight1.png");
+      color=s;
+      board = b;
+      otherPieces = o;
+      type = "Knight";
+      cappanel = cap;
+   }
    
    public ArrayList<int[]> legalMoves(){
       ArrayList<int[]> finlegal = new ArrayList<int[]>();

@@ -13,7 +13,17 @@ public class Rook extends Piece{
         type = "Rook";
         cappanel = cap;
     }
-   
+    public Rook(int x1, int y1,char s, int[][] b, ArrayList<ChessPiece> o,CapturedPieces cap)
+    {
+        x = x1;
+        y = y1;
+        file = (s=='W')?("pieces/rook.png"):("pieces/rook1.png");
+        board = b;
+        color = s;
+        otherPieces = o;
+        type = "Rook";
+        cappanel = cap;
+    }
    public ArrayList<int[]> legalMoves(){
       ArrayList<int[]> finlegal = new ArrayList<int[]>();
       ArrayList<int[]> legal = new ArrayList<int[]>();
