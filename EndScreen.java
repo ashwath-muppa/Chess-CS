@@ -1,14 +1,11 @@
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
-public class StartScreen extends JPanel {
-    private JFrame parentFrame;
+public class EndScreen extends JPanel {
     private JTextField player1Field;
     private JTextField player2Field;
 
-    public StartScreen(JFrame parentFrame) {
-        this.parentFrame = parentFrame;
+    public EndScreen(){
         setLayout(new BorderLayout());
         setBackground(new Color(240, 240, 240));
 
@@ -57,18 +54,6 @@ public class StartScreen extends JPanel {
         startButton.setFont(new Font("Arial", Font.BOLD, 18));
         startButton.setForeground(Color.BLACK);
         startButton.setPreferredSize(new Dimension(200, 50));
-        startButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //parentFrame.setVisible(false);
-                parentFrame.dispose();
-                JFrame gameFrame = new JFrame("Chess");
-                gameFrame.setSize(862, 537+75);
-                gameFrame.setLocationRelativeTo(null);
-                gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                gameFrame.setContentPane(new ChessPanel(gameFrame));
-                gameFrame.setVisible(true);
-            }
-        });
         buttonPanel.add(startButton);
 
         // Adding Components to the Panel

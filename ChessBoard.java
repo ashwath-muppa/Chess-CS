@@ -65,7 +65,15 @@ public class ChessBoard extends JPanel{
    public void setLighter(Color k){
       lighter=k;
    }
-   
+   public boolean twoKings(){
+      int ctr = 0;
+      for(ChessPiece animationObject : animationObjects){
+         if(animationObject.getType().equals("King")){
+            ctr++;
+         }
+      }   
+      return ctr==2;
+   }
    // Method to draw the board underneath 
    public void drawBoard(){
       myBuffer.setColor(darker);

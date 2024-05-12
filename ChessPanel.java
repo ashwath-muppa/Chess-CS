@@ -17,7 +17,9 @@ public class ChessPanel extends JPanel{
    private int curMY;
    private JComboBox<String> cb;
    private JLabel turn;
-   public ChessPanel(){
+   private JFrame curFrame;
+   public ChessPanel(JFrame k){
+      curFrame = k;
       //adds subpanel and main panel to JPanel
       setLayout(new BorderLayout());
       JPanel east = new JPanel();
@@ -106,6 +108,15 @@ public class ChessPanel extends JPanel{
             //move to there and no more pieces are active now
              else if(display.legalMove(e.getX(), e.getY(), curMX, curMY)){
                pieceActive = false;
+               if(!display.twoKings()){
+                  curFrame.dispose();
+                  JFrame endFrame = new JFrame("Chess");
+                  endFrame.setSize(862, 537+75);
+                  endFrame.setLocationRelativeTo(null);
+                  endFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                  endFrame.setContentPane(new EndScreen());
+                  endFrame.setVisible(true);
+               }
                if(turn.getText().substring(0,5).equals("White")){
                   turn.setText("Black to Play");
                }else{

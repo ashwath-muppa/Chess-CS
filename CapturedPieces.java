@@ -47,7 +47,6 @@ public class CapturedPieces extends JPanel{
         startingBlack-=20;
     }
     repaint();
-    // System.out.println("HEY");
    }
     
    }

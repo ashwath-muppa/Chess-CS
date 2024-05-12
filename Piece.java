@@ -127,7 +127,6 @@ public abstract class Piece implements ChessPiece{
                             break;
                     }   
                 }
-                
             }
         //the piece will move, so set the state at the current place to 0
         board[(int)(Math.floor(getY()/64))][(int)(Math.floor(getX()/64))]=0;
