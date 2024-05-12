@@ -23,7 +23,7 @@ public class ChessPanel extends JPanel{
       JPanel east = new JPanel();
       east.setLayout(new GridLayout(15,1));
       JLabel title = new JLabel("Welcome To Chess!");
-      title.setFont(new Font(Font.SERIF, Font.ITALIC, 35));
+      title.setFont(new Font(Font.SERIF, Font.BOLD, 35));
       title.setHorizontalAlignment(SwingConstants.CENTER);
       title.setBackground(Color.BLACK);
       title.setOpaque(true);
