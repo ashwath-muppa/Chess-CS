@@ -18,8 +18,5 @@ public interface ChessPiece{
    public String getType();   // Method to get the type of the chess piece (e.g., "Pawn", "Rook")
    public boolean getActive();   // Method to check if the chess piece is active
    public ArrayList<int[]> protectedPieces();   // Method to get the list of protected pieces by the chess piece
-<<<<<<< HEAD
-=======
    public void drawLegal(Graphics g);
->>>>>>> 84cb950463b084c1af2fa19a1cc7894023ced621
 }
