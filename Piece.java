@@ -151,7 +151,6 @@ public abstract class Piece implements ChessPiece{
         //play the audio depending on wether it captured a piece of not
         playAudio((captured)?("capture.wav"):("move.wav"));
       }
-      
 
       public static void playAudio(String filename) {
         try {
@@ -166,16 +165,19 @@ public abstract class Piece implements ChessPiece{
             ex.printStackTrace(); // print errors
         }
     }
-    public void drawMe(Graphics g)
-    {  
-    if(active){ // if piece is active, highlight legal moves
-        g.setColor(new Color(0,255,0,128));
-        g.fillRect(getX(), getY(),64,64);
-        for(int[] k : legalMoves()){
-            g.fillRect((int)(Math.floor(k[0]/64)*64), (int)(Math.floor(k[1]/64)*64),64,64);
+
+    public void drawLegal(Graphics g){
+        if(active){ // if piece is active, highlight legal moves
+            g.setColor(new Color(0,255,0,128));
+            g.fillRect(getX(), getY(),64,64);
+            for(int[] k : legalMoves()){
+                g.fillRect((int)(Math.floor(k[0]/64)*64), (int)(Math.floor(k[1]/64)*64),64,64);
+            }
         }
     }
 
+    public void drawMe(Graphics g)
+    {  
       ImageIcon piece = new ImageIcon(file); // draw the piece
       g.drawImage(piece.getImage(),getX(), getY(), 64,64,null);
     }

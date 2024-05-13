@@ -18,12 +18,15 @@ public class ChessPanel extends JPanel{
    private JComboBox<String> cb;
    private JLabel turn;
    private JFrame curFrame;
-   public ChessPanel(JFrame k){
+   private String[] gameToLoad;
+   public ChessPanel(JFrame k, String[] load){
       curFrame = k;
+      gameToLoad = load;
       //adds subpanel and main panel to JPanel
       setLayout(new BorderLayout());
       JPanel east = new JPanel();
       east.setLayout(new GridLayout(15,1));
+
       JLabel title = new JLabel("Welcome To Chess!");
       title.setFont(new Font(Font.SERIF, Font.BOLD, 35));
       title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -31,20 +34,35 @@ public class ChessPanel extends JPanel{
       title.setOpaque(true);
       title.setForeground(Color.WHITE);
       east.add(title);
-      JTextArea inst = new JTextArea("(DISCLAMER) You have to unselect a piece to select a \nnew one");
-      inst.setBackground(Color.GRAY);
-      inst.setEditable(false);
+
+      JLabel names = new JLabel(gameToLoad[0].toUpperCase()+" v. "+gameToLoad[1].toUpperCase());
+      names.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+      names.setHorizontalAlignment(SwingConstants.CENTER);
+      east.add(names);
+
+      JLabel scores = new JLabel("Current Score: "+gameToLoad[2]+" - "+gameToLoad[3]);
+      scores.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+      scores.setHorizontalAlignment(SwingConstants.CENTER);
+      east.add(scores);
+
+      JLabel inst = new JLabel("INSTRUCTIONS");
+      inst.setBackground(Color.BLACK);
+      inst.setForeground(Color.RED);
+      inst.setFont(new Font(Font.SERIF, Font.BOLD, 27));
+      inst.setHorizontalAlignment(SwingConstants.CENTER);
+      inst.setOpaque(true);
       east.add(inst);
-       east.add(new JLabel("Select Background:"));
-       String[] choices = { "Green-White","Blue-White", "Brown-White"};
-       cb = new JComboBox<String>(choices);
-       east.add(cb);
-       JButton btn = new JButton("OK");
-       btn.addActionListener(new ButtonListener());
-       east.add(btn);
-       east.setPreferredSize(new Dimension(350,512));
-       turn = new JLabel("White to Play");
-       east.add(turn);
+
+      east.add(new JLabel("Select Background:"));
+      String[] choices = { "Green-White","Blue-White", "Brown-White"};
+      cb = new JComboBox<String>(choices);
+      east.add(cb);
+      JButton btn = new JButton("OK");
+      btn.addActionListener(new ButtonListener());
+      east.add(btn);
+      east.setPreferredSize(new Dimension(350,512));
+      turn = new JLabel("White to Play");
+      east.add(turn);
 
       CapturedPieces south = new CapturedPieces();
       south.setFocusable(true);
@@ -56,7 +74,6 @@ public class ChessPanel extends JPanel{
       display.setFocusable(true);
       add(display,BorderLayout.CENTER);
       display.addMouseListener(new Mouse());
-      
    }
 
 
@@ -114,7 +131,7 @@ public class ChessPanel extends JPanel{
                   endFrame.setSize(862, 537+75);
                   endFrame.setLocationRelativeTo(null);
                   endFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                  endFrame.setContentPane(new EndScreen());
+                  endFrame.setContentPane(new EndScreen("la"));
                   endFrame.setVisible(true);
                }
                if(turn.getText().substring(0,5).equals("White")){

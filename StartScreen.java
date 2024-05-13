@@ -1,12 +1,15 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 public class StartScreen extends JPanel {
     private JFrame parentFrame;
     private JTextField player1Field;
     private JTextField player2Field;
-
+    private JPanel instructionsPanel;
     public StartScreen(JFrame parentFrame) {
         this.parentFrame = parentFrame;
         setLayout(new BorderLayout());
@@ -20,7 +23,7 @@ public class StartScreen extends JPanel {
         titlePanel.add(titleLabel);
 
         // Instructions Panel
-        JPanel instructionsPanel = new JPanel(new BorderLayout());
+        instructionsPanel = new JPanel(new BorderLayout());
         instructionsPanel.setBackground(new Color(240, 240, 240));
         JTextArea instructionsArea = new JTextArea();
         instructionsArea.setText("Instructions:\n\n"
@@ -53,20 +56,85 @@ public class StartScreen extends JPanel {
         // Button Panel
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setBackground(new Color(100, 149, 237)); // Darker blue color
-        JButton startButton = new JButton("Start Gameplay");
-        startButton.setFont(new Font("Arial", Font.BOLD, 18));
-        startButton.setForeground(Color.BLACK);
-        startButton.setPreferredSize(new Dimension(200, 50));
-        startButton.addActionListener(new ActionListener() {
+        JButton createButton = new JButton("Create");
+        createButton.setFont(new Font("Arial", Font.BOLD, 18));
+        createButton.setForeground(Color.BLACK);
+        createButton.setPreferredSize(new Dimension(200, 50));
+        createButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //parentFrame.setVisible(false);
+                String player1 = player1Field.getText().toLowerCase().replace(" ", "");
+                String player2 = player2Field.getText().toLowerCase().replace(" ", "");
+                String[] gameLoad = {player1, player2, "0", "0"};
                 parentFrame.dispose();
                 JFrame gameFrame = new JFrame("Chess");
                 gameFrame.setSize(862, 537+75);
                 gameFrame.setLocationRelativeTo(null);
                 gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                gameFrame.setContentPane(new ChessPanel(gameFrame));
+                gameFrame.setContentPane(new ChessPanel(gameFrame, gameLoad));
                 gameFrame.setVisible(true);
+            }
+        });
+        buttonPanel.add(createButton);
+
+
+        JButton startButton = new JButton("Load");
+        startButton.setFont(new Font("Arial", Font.BOLD, 18));
+        startButton.setForeground(Color.BLACK);
+        startButton.setPreferredSize(new Dimension(200, 50));
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String player1 = player1Field.getText().toLowerCase().replace(" ", "");
+                String player2 = player2Field.getText().toLowerCase().replace(" ", "");
+                BufferedReader reader;
+                ArrayList<String[]> data = new ArrayList<String[]>();
+                try {
+                    reader = new BufferedReader(new FileReader("data.txt"));
+                    String line = reader.readLine();
+
+                    while (line != null) {
+                        data.add(line.split(" "));
+                        // read next line
+                        line = reader.readLine();
+                    }
+
+                    reader.close();
+                } catch (IOException m) {
+                    m.printStackTrace();
+                }
+
+                boolean instanceFound = player1.equals("n/a")&&player2.equals("n/a");
+                String[] gameLoad = {"N/A", "N/A", "0", "0"};
+                for(String[] game : data){
+                    if(player1.equals(game[1])){
+                        if(player2.equals(game[0])){
+                            instanceFound = true;
+                            gameLoad = game;
+                            break;
+                        }
+                    }else if(player1.equals(game[0])){
+                        if(player2.equals(game[1])){
+                            instanceFound = true;
+                            gameLoad = game;
+                            break;
+                        }
+                    }
+                }
+                if(instanceFound){
+                    parentFrame.dispose();
+                    JFrame gameFrame = new JFrame("Chess");
+                    gameFrame.setSize(862, 537+75);
+                    gameFrame.setLocationRelativeTo(null);
+                    gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    gameFrame.setContentPane(new ChessPanel(gameFrame, gameLoad));
+                    gameFrame.setVisible(true);
+                }
+                else{
+                    instructionsArea.setText("Instructions:\n\n"
+                    + "Enter 2 names to load a game in.\n\n"
+                    + "If the 2 names do not appear to be stored, it will create a new instance.\n\n"
+                    + "If you do not want your data to be saved, please type in 'N/A' for both fields.\n\n"
+                    + "INSTANCE NOT FOUND");
+                }
             }
         });
         buttonPanel.add(startButton);

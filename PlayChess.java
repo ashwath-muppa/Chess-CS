@@ -8,7 +8,7 @@ public class PlayChess{
    {
       //open JFrame that contains all the panels
       JFrame f = new JFrame("Start Playing Chess");
-      f.setSize(1000,300);
+      f.setSize(1000,350);
       f.setLocation(100,50);
       f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       f.setContentPane(new StartScreen(f));

@@ -13,4 +13,5 @@ public interface ChessPiece{
    public String getType();
    public boolean getActive();
    public ArrayList<int[]> protectedPieces();
+   public void drawLegal(Graphics g);
 }

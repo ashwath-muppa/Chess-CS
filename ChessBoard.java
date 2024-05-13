@@ -90,12 +90,13 @@ public class ChessBoard extends JPanel{
          }
       }
    }
-
    //Draws the board and each piece
    public void animate(){
       //re draws board to account for if the user changes the theme midway
       drawBoard();
-
+      for(ChessPiece animationObject : animationObjects){
+         animationObject.drawLegal(myBuffer);
+      }
       // Iterate through each chess piece and animate it
       for(ChessPiece animationObject : animationObjects){
          animationObject.step();
