@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import java.awt.*;
 // import javax.swing.*;
 
@@ -65,10 +64,6 @@
 //     }
 // }
 
-=======
-// Arjun Garg and Ashwath Muppa
-// Final Project (Chess): End screen
->>>>>>> 6d52e5a24c745326ca3f5dfa1100a2db6248f1cd
 
 import java.awt.*;
 import javax.swing.*;
