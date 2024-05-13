@@ -1,5 +1,5 @@
 // Arjun Garg and Ashwath Muppa
-// Chess: 
+// Final Project (Chess): Chess board
 
 import javax.swing.*;
 import java.awt.event.*;

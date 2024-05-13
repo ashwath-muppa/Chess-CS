@@ -1,3 +1,6 @@
+// Arjun Garg and Ashwath Muppa
+// Final Project (Chess): Queen
+
 import java.util.ArrayList;
 
 public class Queen extends Piece{

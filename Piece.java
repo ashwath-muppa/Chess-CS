@@ -1,3 +1,6 @@
+// Arjun Garg and Ashwath Muppa
+// Final Project (Chess): Abstract class for pieces
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;

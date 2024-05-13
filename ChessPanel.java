@@ -1,3 +1,6 @@
+// Arjun Garg and Ashwath Muppa
+// Final Project (Chess): Panel
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

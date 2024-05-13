@@ -1,3 +1,6 @@
+// Arjun Garg and Ashwath Muppa
+// Final Project (Chess): King
+
 import java.util.ArrayList;
 
 public class King extends Piece{

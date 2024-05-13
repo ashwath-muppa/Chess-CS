@@ -1,6 +1,9 @@
+// Arjun Garg and Ashwath Muppa
+// Final Project (Chess): Rook
+
 import java.util.ArrayList;
 
-// // Rook class extends Piece class
+// Rook class extends Piece class
 public class Rook extends Piece{
 
     // Constructor for Rook class

@@ -1,3 +1,6 @@
+// Arjun Garg and Ashwath Muppa
+// Final Project (Chess): Knight
+
 import java.util.ArrayList;
 
 // Class for Knight piece
