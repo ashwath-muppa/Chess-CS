@@ -1,3 +1,6 @@
+// Arjun Garg and Ashwath Muppa
+// Final Project (Chess): Driver
+
 import javax.swing.JFrame;
 
 //Driver to run chess

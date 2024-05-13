@@ -1,3 +1,6 @@
+// Arjun Garg and Ashwath Muppa
+// Final Project (Chess): Pawn
+
 import java.util.ArrayList;
 import java.lang.Math;
 
