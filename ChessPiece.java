@@ -6,21 +6,6 @@ import java.util.ArrayList;
 
 // Interface defining the properties and behaviors of a chess piece
 public interface ChessPiece{
-<<<<<<< HEAD
-   public void step();
-   public char getColor();
-   public void drawMe(Graphics g);
-   public int getX();
-   public int getY();
-   public String getFile();
-   public void activate();
-   public ArrayList<int[]> legalMoves();
-   public void setMove(int x, int y);
-   public String getType();
-   public boolean getActive();
-   public ArrayList<int[]> protectedPieces();
-   public void drawLegal(Graphics g);
-=======
    public void step();   // Method to perform a step or move
    public char getColor();   // Method to get the color of the chess piece
    public void drawMe(Graphics g);   // Method to draw the chess piece on the graphics object
@@ -33,5 +18,5 @@ public interface ChessPiece{
    public String getType();   // Method to get the type of the chess piece (e.g., "Pawn", "Rook")
    public boolean getActive();   // Method to check if the chess piece is active
    public ArrayList<int[]> protectedPieces();   // Method to get the list of protected pieces by the chess piece
->>>>>>> 6d52e5a24c745326ca3f5dfa1100a2db6248f1cd
+   public void drawLegal(Graphics g);
 }
