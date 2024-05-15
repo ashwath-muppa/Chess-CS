@@ -27,9 +27,9 @@ public class StartScreen extends JPanel {
         instructionsPanel.setBackground(new Color(240, 240, 240));
         JTextArea instructionsArea = new JTextArea();
         instructionsArea.setText("Instructions:\n\n"
-                                + "Enter 2 names to load a game in.\n\n"
-                                + "If the 2 names do not appear to be stored, it will create a new instance.\n\n"
-                                + "If you do not want your data to be saved, please type in 'N/A' for both fields.");
+                                + "Enter 2 names to load a game in (If the instance doesn't exist, it will warn you).\n\n"
+                                + "If instance doesn't exist, create a new one\n\n"
+                                + "If you do not want your data to be saved, leave 'N/A' for both fields.");
         instructionsArea.setEditable(false);
         instructionsArea.setFont(new Font("Arial", Font.PLAIN, 18));
         instructionsArea.setOpaque(false);
@@ -38,9 +38,9 @@ public class StartScreen extends JPanel {
         // Input Panel
         JPanel inputPanel = new JPanel(new GridLayout(2, 2, 10, 10));
         inputPanel.setBackground(new Color(255, 248, 220));
-        player1Field = new JTextField("Player 1");
+        player1Field = new JTextField("White Player");
         player1Field.setFont(new Font("Arial", Font.PLAIN, 18));
-        player2Field = new JTextField("Player 2");
+        player2Field = new JTextField("Black Player");
         player2Field.setFont(new Font("Arial", Font.PLAIN, 18));
         JLabel player1Label = new JLabel("Player 1:");
         player1Label.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -96,7 +96,6 @@ public class StartScreen extends JPanel {
                         // read next line
                         line = reader.readLine();
                     }
-
                     reader.close();
                 } catch (IOException m) {
                     m.printStackTrace();
@@ -130,10 +129,10 @@ public class StartScreen extends JPanel {
                 }
                 else{
                     instructionsArea.setText("Instructions:\n\n"
-                    + "Enter 2 names to load a game in.\n\n"
-                    + "If the 2 names do not appear to be stored, it will create a new instance.\n\n"
-                    + "If you do not want your data to be saved, please type in 'N/A' for both fields.\n\n"
-                    + "INSTANCE NOT FOUND");
+                                + "Enter 2 names to load a game in (If the instance doesn't exist, it will warn you).\n\n"
+                                + "If instance doesn't exist, create a new one\n\n"
+                                + "If you do not want your data to be saved, leave 'N/A' for both fields.\n\n"
+                                + "INSTANCE NOT FOUND");
                 }
             }
         });

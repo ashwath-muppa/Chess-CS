@@ -20,9 +20,10 @@ public class ChessBoard extends JPanel{
    private ArrayList<ChessPiece> animationObjects;    // List to store chess pieces
    private Color darker = new Color(118,150,86);   // Darker color for squares on the board
    private Color lighter = new Color(238,238,210);   // Lighter color for squares on the board
+   private String[] loaded;
    
    // Constructor
-   public ChessBoard(int[][] b, CapturedPieces cap){
+   public ChessBoard(int[][] b, CapturedPieces cap, String[] game){
       // Initialize image and buffer for drawing
       myImage =  new BufferedImage(FRAME, FRAME, BufferedImage.TYPE_INT_RGB);
       myBuffer = myImage.getGraphics();
@@ -50,12 +51,22 @@ public class ChessBoard extends JPanel{
          animationObjects.add(new Pawn('B', i, b,animationObjects,cap));
       }
 
+      loaded = game;
+
       // Start timer for animation
       t = new Timer(5, new AnimationListener());
       t.start();
    }
    public void paintComponent(Graphics g){
       g.drawImage(myImage, 0, 0, getWidth(), getHeight(), null);
+   }
+
+   public String getWinner(){
+      if(turn=='W'){
+         return loaded[1];
+      }else{
+         return loaded[0];
+      }
    }
 
    // Methods to set different board colors

@@ -48,6 +48,16 @@ public class ChessPanel extends JPanel{
       scores.setHorizontalAlignment(SwingConstants.CENTER);
       east.add(scores);
 
+      turn = new JLabel("White to Play");
+      turn.setHorizontalAlignment(SwingConstants.CENTER);
+      turn.setBackground(Color.WHITE);
+      turn.setForeground(Color.BLACK);
+      turn.setOpaque(true);
+      turn.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+      east.add(turn);
+
+      east.add(new JLabel(""));
+
       JLabel inst = new JLabel("INSTRUCTIONS");
       inst.setBackground(Color.BLACK);
       inst.setForeground(Color.RED);
@@ -64,8 +74,7 @@ public class ChessPanel extends JPanel{
       btn.addActionListener(new ButtonListener());
       east.add(btn);
       east.setPreferredSize(new Dimension(350,512));
-      turn = new JLabel("White to Play");
-      east.add(turn);
+
 
       CapturedPieces south = new CapturedPieces();
       south.setFocusable(true);
@@ -73,7 +82,7 @@ public class ChessPanel extends JPanel{
       south.setPreferredSize(new Dimension(862,75));
 
       add(east,BorderLayout.EAST);
-      display = new ChessBoard(piecesBoard, south);
+      display = new ChessBoard(piecesBoard, south, gameToLoad);
       display.setFocusable(true);
       add(display,BorderLayout.CENTER);
       display.addMouseListener(new Mouse());
@@ -134,13 +143,17 @@ public class ChessPanel extends JPanel{
                   endFrame.setSize(862, 537+75);
                   endFrame.setLocationRelativeTo(null);
                   endFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                  endFrame.setContentPane(new EndScreen("la"));
+                  endFrame.setContentPane(new EndScreen(display.getWinner()));
                   endFrame.setVisible(true);
                }
                if(turn.getText().substring(0,5).equals("White")){
                   turn.setText("Black to Play");
+                  turn.setBackground(Color.BLACK);
+                  turn.setForeground(Color.WHITE);
                }else{
                   turn.setText("White to Play");
+                  turn.setBackground(Color.WHITE);
+                  turn.setForeground(Color.BLACK);
                }
             }
          }
