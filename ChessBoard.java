@@ -1,14 +1,16 @@
 // Arjun Garg and Ashwath Muppa
 // Final Project (Chess): Chess board
 
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.lang.Math;
-
-// Class to create and configure chess board display
+/**
+* Class to create and configure the chess board display.
+*/
 public class ChessBoard extends JPanel{  
    // Variables declaration
    private char turn = 'W';   // Variable to keep track of whose turn it is ('W' for white, 'B' for black)
@@ -22,7 +24,13 @@ public class ChessBoard extends JPanel{
    private Color lighter = new Color(238,238,210);   // Lighter color for squares on the board
    private String[] loaded;
    
-   // Constructor
+   /**
+   * Constructor for ChessBoard.
+   *
+   * @param b the initial board setup
+   * @param cap the captured pieces panel
+   * @param game the board of piece locations
+   */
    public ChessBoard(int[][] b, CapturedPieces cap, String[] game){
       // Initialize image and buffer for drawing
       myImage =  new BufferedImage(FRAME, FRAME, BufferedImage.TYPE_INT_RGB);
@@ -57,6 +65,11 @@ public class ChessBoard extends JPanel{
       t = new Timer(5, new AnimationListener());
       t.start();
    }
+   /**
+   * Draws the buffered image to the panel.
+   *
+   * @param g the graphics object
+   */
    public void paintComponent(Graphics g){
       g.drawImage(myImage, 0, 0, getWidth(), getHeight(), null);
    }
@@ -69,13 +82,27 @@ public class ChessBoard extends JPanel{
       }
    }
 
-   // Methods to set different board colors
+   /**
+   * Sets the darker color for the board squares.
+   *
+   * @param k the darker color
+   */
    public void setDarker(Color k){
       darker=k;
    }
+   /**
+   * Sets the lighter color for the board squares.
+   *
+   * @param k the lighter color
+   */
    public void setLighter(Color k){
       lighter=k;
    }
+   /**
+   * Checks if there are exactly two kings on the board.
+   *
+   * @return true if there are two kings, false otherwise
+   */
    public boolean twoKings(){
       int ctr = 0;
       for(ChessPiece animationObject : animationObjects){
@@ -85,7 +112,9 @@ public class ChessBoard extends JPanel{
       }   
       return ctr==2;
    }
-   // Method to draw the board underneath 
+   /**
+   * Draws the chess board with alternating colors.
+   */
    public void drawBoard(){
       myBuffer.setColor(darker);
       myBuffer.fillRect(0,0,512,512);
@@ -101,7 +130,9 @@ public class ChessBoard extends JPanel{
          }
       }
    }
-   //Draws the board and each piece
+   /**
+   * Redraws the board and animates each piece.
+   */
    public void animate(){
       //re draws board to account for if the user changes the theme midway
       drawBoard();
@@ -115,7 +146,13 @@ public class ChessBoard extends JPanel{
       }        
       repaint();
    }
-   // Updates the board, based on which piece is selected
+   /**
+   * Updates the board based on which piece is selected.
+   *
+   * @param x the x-coordinate of the selection
+   * @param y the y-coordinate of the selection
+   * @return an array with update status and new coordinates
+   */
    public int[] update(int x, int y){
       int [] fin = {0,0,0};
       for(ChessPiece animationObject : animationObjects){  
@@ -134,8 +171,15 @@ public class ChessBoard extends JPanel{
       }
       return fin;
    }
-   //Checks if user inputted legal move for that piece, and makes move if legal
-   //returns a boolean so that the panel can set its field accordingly
+   /**
+   * Checks if the user inputted a legal move for that piece, and makes the move.
+   *
+   * @param x the x-coordinate of the target position
+   * @param y the y-coordinate of the target position
+   * @param curx the current x-coordinate of the piece
+   * @param cury the current y-coordinate of the piece
+   * @return true if the move is legal, false otherwise
+   */
    public boolean legalMove(int x, int y, int curx, int cury){
       //iterates through all pieces
       for(ChessPiece animationObject : animationObjects){  
@@ -171,8 +215,15 @@ public class ChessBoard extends JPanel{
       return false;
     }  
     
-   // ActionListener for animation
+   /**
+   * ActionListener for animation.
+   */
    private class AnimationListener implements ActionListener{
+      /**
+   * Handles the action event to animate the chess pieces.
+   *
+   * @param e the action event
+   */
       public void actionPerformed(ActionEvent e)
       {
          animate();

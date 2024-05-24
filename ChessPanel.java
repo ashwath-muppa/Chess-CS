@@ -4,6 +4,9 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+/**
+* ChessPanel class represents the main panel for the chess game.
+*/
 public class ChessPanel extends JPanel{
    private ChessBoard display;
    private boolean pieceActive;
@@ -22,6 +25,14 @@ public class ChessPanel extends JPanel{
    private JLabel turn;
    private JFrame curFrame;
    private String[] gameToLoad;
+
+   /**
+   * Constructor for ChessPanel.
+   *
+   * @param k the main frame
+   * @param load the game data to load
+   */
+
    public ChessPanel(JFrame k, String[] load){
       curFrame = k;
       gameToLoad = load;
@@ -88,9 +99,16 @@ public class ChessPanel extends JPanel{
       display.addMouseListener(new Mouse());
    }
 
-
+   /**
+   * ButtonListener class handles button click events.
+   */
    private class ButtonListener implements ActionListener
    {
+   /**
+   * Handles the button click event to change board color.
+   *
+   * @param e the action event
+   */
       public void actionPerformed(ActionEvent e)
       {
          String x = cb.getSelectedItem().toString();
@@ -113,8 +131,15 @@ public class ChessPanel extends JPanel{
       }
    }
 
-   //Recieves the mouse input
+   /**
+   * Mouse class handles mouse click events.
+   */
    private class Mouse extends MouseAdapter{
+      /**
+      * Handles mouse click events for piece selection and movement.
+      *
+      * @param e the mouse event
+      */
       public void mouseClicked(MouseEvent e){  
          //If no piece has been selected yet
          if(!pieceActive){

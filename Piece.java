@@ -7,84 +7,142 @@ import java.util.ArrayList;
 import javax.sound.sampled.*;
 import java.io.*;
 
-// Abstract class to be implemented by all board pieces
+/**
+* Abstract class representing a chess piece.
+*/
 public abstract class Piece implements ChessPiece{
-    //x and y of the piece
+    /** x-coordinate of the piece */
     protected int x;
+    /** y-coordinate of the piece */
     protected int y;
-    //the desination that the pieces must reach
+    /** Destination y-coordinate */
     protected int destY;
+    /** Destination x-coordinate */
     protected int destX;
-    //the speed of the x and y values
+    /** Speed in y-direction */
     protected int dY = 4;
+    /** Speed in x-direction */
     protected int dX = 4;
-    //the file for the chess piece
+    /** File path for the chess piece */
     protected String file;
-    //the piece is active (default starts from false)
+    /** Flag indicating if the piece is active (default: false) */
     protected boolean active = false;
-    //Color of the piece
+    /** Color of the piece ('W' for white, 'B' for black) */
     protected char color;
-    //the piece is moving (default starts from false)
+    /** Flag indicating if the piece is moving (default: false) */
     protected boolean moving=false;
-    //stores if there is a piece present in a position of the board or not
+    /** Board representation */
     protected int[][] board;
-    //contains the array list of all the other pieces
+    /** List of other pieces */
     protected ArrayList<ChessPiece> otherPieces;
-    //stores the type of the piece
+    /** Type of the piece */
     protected String type;
-
+    /** Panel for captured pieces */
     protected CapturedPieces cappanel;
 
-    //gets the state if the piece is active or not
+    /**
+    * Retrieves the state if the piece is active or not.
+    *
+    * @return true if the piece is active, false otherwise
+    */
     public boolean getActive(){
         return active;
     }
-    //gets the type of piece
+    /**
+    * Retrieves the type of piece.
+    *
+    * @return the type of the piece
+    */
     public String getType(){
         return type;
     }
-    //gets the current x value
+    /**
+    * Retrieves the current x-coordinate of the piece.
+    *
+    * @return the x-coordinate of the piece
+    */
     public int getX(){
         return x;
     }
-    //gets the current y value
+    /**
+    * Retrieves the current y-coordinate of the piece.
+    *
+    * @return the y-coordinate of the piece
+    */
     public int getY(){
         return y;
     }
-    //gets the change (speed) in y of the piece
+    /**
+    * Retrieves the change (speed) in y of the piece.
+    *
+    * @return the speed in y-direction
+    */
     public int getdY(){
         return dY;
     }
-    //gets the change (speed) in x of the piece
+    /**
+    * Retrieves the change (speed) in x of the piece.
+    *
+    * @return the speed in x-direction
+    */
     public int getdX(){
         return dX;
     }
-    //set the destination x value it needs to reach
+    /**
+    * Sets the destination x-coordinate.
+    *
+    * @param xValue the x-coordinate to set as destination
+    */
     public void setDestX(int xValue){
         destX = xValue;
     }
-    //set the destination y value it needs to reach
+    /**
+    * Sets the destination y-coordinate.
+    *
+    * @param yValue the y-coordinate to set as destination
+    */
     public void setDestY(int yValue){
         destY = yValue;
     }
-    //set the x value of the piece
+    /**
+    * Sets the x-coordinate of the piece.
+    *
+    * @param xValue the x-coordinate to set
+    */
     public void setX(int xValue){
         x = xValue;
     }
-    //set the y value of the piece
+    /**
+    * Sets the y-coordinate of the piece.
+    *
+    * @param yValue the y-coordinate to set
+    */
     public void setY(int yValue){
         y = yValue;
     }
-    //get the color of the piece, W for white and B for black
+    /**
+    * Retrieves the color of the piece.
+    *
+    * @return the color of the piece ('W' for white, 'B' for black)
+    */
     public char getColor(){
         return color;
     }
-
+    /**
+    * Retrieves the file path of the image representing the chess piece.
+    *
+    * @return the file path of the image
+    */
     public String getFile(){
         return file;
     }
 
-    //method to set move to x and y cords provided
+    /**
+    * Sets the move to the provided x and y coordinates.
+    *
+    * @param x the x-coordinate to move to
+    * @param y the y-coordinate to move to
+    */
     public void setMove(int x, int y){
         //we dont know if piece captured anything yet so set it to false
         boolean captured = false;
@@ -154,21 +212,29 @@ public abstract class Piece implements ChessPiece{
         //play the audio depending on wether it captured a piece of not
         playAudio((captured)?("capture.wav"):("move.wav"));
       }
+    /**
+    * Plays audio based on the provided filename.
+    *
+    * @param filename the name of the audio file to play
+    */
+    public static void playAudio(String filename) {
+    try {
+        File audioFile = new File(filename); // opens file
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile); // convert to audio file
 
-      public static void playAudio(String filename) {
-        try {
-            File audioFile = new File(filename); // opens file
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile); // convert to audio file
+        Clip clip = AudioSystem.getClip(); // get audio clip
+        clip.open(audioStream); // open audio clip
   
-            Clip clip = AudioSystem.getClip(); // get audio clip
-            clip.open(audioStream); // open audio clip
-  
-            clip.start(); // play clip
-        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) { // catch any errors
-            ex.printStackTrace(); // print errors
+        clip.start(); // play clip
+    } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) { // catch any errors
+        ex.printStackTrace(); // print errors
         }
     }
-
+    /**
+    * Draws legal moves on the graphics object.
+    *
+    * @param g the graphics object to draw on
+    */
     public void drawLegal(Graphics g){
         if(active){ // if piece is active, highlight legal moves
             g.setColor(new Color(0,255,0,128));
@@ -178,18 +244,26 @@ public abstract class Piece implements ChessPiece{
             }
         }
     }
-
+    /**
+    * Draws the chess piece on the graphics object.
+    *
+    * @param g the graphics object to draw on
+    */
     public void drawMe(Graphics g)
     {  
       ImageIcon piece = new ImageIcon(file); // draw the piece
       g.drawImage(piece.getImage(),getX(), getY(), 64,64,null);
     }
-
-    // activates and deactivates
+    /**
+    * Activates or deactivates the piece.
+    */
     public void activate(){
         active = !active;
     }
-    //animation
+    
+    /**
+    * Performs animation step for the piece.
+    */
     public void step(){
         //if it has not reached destination yet
         if(moving){
@@ -217,8 +291,17 @@ public abstract class Piece implements ChessPiece{
         }
     }
 
-    //abstract classes that each type of piece defines for itself
+    /**
+    * Abstract method to get the legal moves of the piece.
+    *
+    * @return list of legal moves
+    */
     public abstract ArrayList<int[]> legalMoves();
+    /**
+    * Abstract method to get the protected pieces of the piece.
+    *
+    * @return list of protected pieces
+    */
     public abstract ArrayList<int[]> protectedPieces();
 
 }

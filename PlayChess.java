@@ -1,11 +1,14 @@
 // Arjun Garg and Ashwath Muppa
-// Final Project (Chess): Driver
+// Final Project (Chess): Chess Driver
+
+/**
+* @version Arjun Garg and Ashwath Muppa, 5/20/2024
+* Period 6, CS Final Project: Chess (Stubs)
+*/
 
 import javax.swing.JFrame;
 
-//Driver to run chess
 
-/**/
 public class PlayChess{
    public static void main(String[] args)
    {

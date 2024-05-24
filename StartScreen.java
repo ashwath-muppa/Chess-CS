@@ -5,11 +5,22 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
+/**
+* StartScreen class represents the initial screen where players can enter names
+* and either start a new game or load an existing one.
+*/
+
 public class StartScreen extends JPanel {
     private JFrame parentFrame;
     private JTextField player1Field;
     private JTextField player2Field;
     private JPanel instructionsPanel;
+    /**
+    * Constructor for StartScreen.
+    *
+    * @param parentFrame the main frame of the application
+    */
     public StartScreen(JFrame parentFrame) {
         this.parentFrame = parentFrame;
         setLayout(new BorderLayout());
@@ -61,6 +72,11 @@ public class StartScreen extends JPanel {
         createButton.setForeground(Color.BLACK);
         createButton.setPreferredSize(new Dimension(200, 50));
         createButton.addActionListener(new ActionListener() {
+            /**
+            * Handles the action event for the Create button.
+            *
+            * @param e the action event
+            */
             public void actionPerformed(ActionEvent e) {
                 String player1 = player1Field.getText().toLowerCase().replace(" ", "");
                 String player2 = player2Field.getText().toLowerCase().replace(" ", "");
@@ -82,6 +98,11 @@ public class StartScreen extends JPanel {
         startButton.setForeground(Color.BLACK);
         startButton.setPreferredSize(new Dimension(200, 50));
         startButton.addActionListener(new ActionListener() {
+            /**
+            * Handles the action event for the Load button.
+            *
+            * @param e the action event
+            */
             public void actionPerformed(ActionEvent e) {
                 String player1 = player1Field.getText().toLowerCase().replace(" ", "");
                 String player2 = player2Field.getText().toLowerCase().replace(" ", "");
