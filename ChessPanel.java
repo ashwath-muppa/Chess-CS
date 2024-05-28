@@ -165,10 +165,10 @@ public class ChessPanel extends JPanel{
                if(!display.twoKings()){
                   curFrame.dispose();
                   JFrame endFrame = new JFrame("Chess");
-                  endFrame.setSize(862, 537+75);
+                  endFrame.setSize(800, 400);
                   endFrame.setLocationRelativeTo(null);
                   endFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                  endFrame.setContentPane(new EndScreen(display.getWinner()));
+                  endFrame.setContentPane(new EndScreen(endFrame, display.getWinner(), gameToLoad));
                   endFrame.setVisible(true);
                }
                if(turn.getText().substring(0,5).equals("White")){

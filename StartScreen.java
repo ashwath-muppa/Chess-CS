@@ -19,10 +19,10 @@ public class StartScreen extends JPanel {
     /**
     * Constructor for StartScreen.
     *
-    * @param parentFrame the main frame of the application
+    * @param f the main frame of the application
     */
-    public StartScreen(JFrame parentFrame) {
-        this.parentFrame = parentFrame;
+    public StartScreen(JFrame f) {
+        parentFrame = f;
         setLayout(new BorderLayout());
         setBackground(new Color(240, 240, 240));
 
