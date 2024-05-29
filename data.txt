@@ -1,3 +1,0 @@
-arjun ashwath 2 0
-whiteplayer blackplayer 0 3
-whiteplayer arju 0 1
