@@ -90,7 +90,7 @@ public class Pawn extends Piece {
                 }
             }
 
-            // Check capture moves
+            // Check capture moves 
             int[][] captures = { { tmX - 1, tmY + 1 }, { tmX + 1, tmY + 1 } };
             for (int[] leg : captures) {
                 for (ChessPiece k : otherPieces) {
