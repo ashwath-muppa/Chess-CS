@@ -67,7 +67,7 @@ public class ChessPanel extends JPanel{
       turn.setFont(new Font(Font.SERIF, Font.BOLD, 20));
       east.add(turn);
 
-      east.add(new JLabel(""));
+      //east.add(new JLabel(""));
 
       JLabel inst = new JLabel("INSTRUCTIONS");
       inst.setBackground(Color.BLACK);
@@ -76,6 +76,25 @@ public class ChessPanel extends JPanel{
       inst.setHorizontalAlignment(SwingConstants.CENTER);
       inst.setOpaque(true);
       east.add(inst);
+
+      String[] instructions = {
+         "1. Click on a piece to select it.",
+         "2. Legal moves will be highlighted in green.",
+         "3. Click on a highlighted square to move.",
+         "4. Capture pieces by moving to their square.",
+         "5. Capture the opponent's king to win.",
+         "6. No castling or enpassant or checks",
+         "7. Use the menu to change board color."
+     };
+
+     for (String instruction : instructions) {
+         JLabel instructionLabel = new JLabel(instruction);
+         instructionLabel.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+         instructionLabel.setBackground(new Color(255, 253, 208));
+         instructionLabel.setOpaque(true);
+         instructionLabel.setHorizontalAlignment(SwingConstants.LEFT);
+         east.add(instructionLabel);
+     }
 
       east.add(new JLabel("Select Background:"));
       String[] choices = { "Green-White","Blue-White", "Brown-White"};

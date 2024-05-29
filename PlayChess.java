@@ -18,7 +18,6 @@ public class PlayChess{
       f.setLocation(100,50);
       f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       f.setContentPane(new StartScreen(f));
-      
       f.setVisible(true);
    }
 }
