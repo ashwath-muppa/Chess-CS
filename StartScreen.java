@@ -128,7 +128,10 @@ public class StartScreen extends JPanel {
                     if(player1.equals(game[1])){
                         if(player2.equals(game[0])){
                             instanceFound = true;
-                            gameLoad = game;
+                            gameLoad[0] = game[1];
+                            gameLoad[1] = game[0];
+                            gameLoad[2] = game[3];
+                            gameLoad[3] = game[2];
                             break;
                         }
                     }else if(player1.equals(game[0])){
